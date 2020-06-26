@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "jsonstar", "jsonstar\jsonstar.fsproj", "{1BC6CAC3-E167-4029-AE63-2E67FA676951}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "jsonstar.test", "jsonstar.test\jsonstar.test.fsproj", "{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1BC6CAC3-E167-4029-AE63-2E67FA676951} = {1BC6CAC3-E167-4029-AE63-2E67FA676951}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BC6CAC3-E167-4029-AE63-2E67FA676951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC6CAC3-E167-4029-AE63-2E67FA676951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC6CAC3-E167-4029-AE63-2E67FA676951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC6CAC3-E167-4029-AE63-2E67FA676951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC8C7918-8D57-4581-977F-26096728B235}
+	EndGlobalSection
+EndGlobal

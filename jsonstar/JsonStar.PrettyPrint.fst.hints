@@ -1,0 +1,47 @@
+[
+  "\u001câv•©ÐEBJ$˜¹\u0011Âyƒ",
+  [
+    [
+      "JsonStar.PrettyPrint.list_map",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "binder_x_3dddec8ced2db740e4e8aaf70542be7a_4",
+        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
+        "equality_tok_Prims.LexTop@tok", "fuel_guarded_inversion_Prims.list",
+        "subterm_ordering_Prims.Cons"
+      ],
+      0,
+      "8174767133da4e2bf6847f276e630040"
+    ],
+    [
+      "JsonStar.PrettyPrint.stringify",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "JsonStar.Json_pretyping_b45bfdceac87390c30533768b4cdf148",
+        "binder_x_b45bfdceac87390c30533768b4cdf148_0",
+        "disc_equation_JsonStar.Json.JArray",
+        "disc_equation_JsonStar.Json.JBoolean",
+        "disc_equation_JsonStar.Json.JNull",
+        "disc_equation_JsonStar.Json.JNumber",
+        "disc_equation_JsonStar.Json.JObject",
+        "disc_equation_JsonStar.Json.JString",
+        "equality_tok_JsonStar.Json.JNull@tok",
+        "equality_tok_Prims.LexTop@tok",
+        "fuel_guarded_inversion_JsonStar.Json.json",
+        "refinement_interpretation_Tm_refine_c1cb7b61c8c5c05e54da9353de8b1161",
+        "subterm_ordering_FStar.Pervasives.Native.Mktuple2",
+        "subterm_ordering_JsonStar.Json.JArray",
+        "subterm_ordering_JsonStar.Json.JObject",
+        "typing_tok_JsonStar.Json.JNull@tok"
+      ],
+      0,
+      "3bd9ee9d026f3590949372f39796e106"
+    ]
+  ]
+]
