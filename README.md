@@ -10,10 +10,10 @@ The code assumes that in the root of the repository there is a directory externa
 external
     fstar
         libs -- contains ulibfs.dll
-	    targets -- contains fsharp.extraction.targets from F* repository
-	    tools 
-	        bin -- contains fstar.exe and everything needed to run it
-	        ulib -- contains the F* standard library (sources) as they are needed for F* to work (F* assumes that ulib is in ..\ulib)
+	targets -- contains fsharp.extraction.targets from F* repository
+	tools 
+	    bin -- contains fstar.exe and everything needed to run it
+	    ulib -- contains the F* standard library (sources) as they are needed for F* to work (F* assumes that ulib is in ..\ulib)
 ```
 
 In the future the external\fstar directory should be converted into a nuget package. 
