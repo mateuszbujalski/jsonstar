@@ -1,0 +1,266 @@
+[
+  "1ƒôz'9 ¤\u0011ÃçgåYT\u0003",
+  [
+    [
+      "JsonStar.Schema.string_options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_FStar.Pervasives.Native.option__uu___haseq",
+        "equation_JsonStar.Schema.regex", "equation_Prims.eqtype",
+        "equation_Prims.nat", "function_token_typing_Prims.int",
+        "function_token_typing_Prims.string",
+        "haseqTm_refine_2d9247a17c2c664c5f66f9cbfc3f12c5",
+        "haseqTm_refine_542f9d4f129664613f2483a6c88bc7c2",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "refinement_kinding_Tm_refine_2d9247a17c2c664c5f66f9cbfc3f12c5",
+        "refinement_kinding_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
+      ],
+      0,
+      "a2ca5875aad7a1b5b33f4f97d4bddca5"
+    ],
+    [
+      "JsonStar.Schema.number_options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_FStar.Pervasives.Native.option__uu___haseq",
+        "equation_Prims.eqtype", "function_token_typing_Prims.string",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
+      ],
+      0,
+      "7f1924a67497bc650bcb1df3d76d9242"
+    ],
+    [
+      "JsonStar.Schema.object_options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_FStar.Pervasives.Native.option__uu___haseq",
+        "assumption_Prims.list__uu___haseq", "equation_Prims.eqtype",
+        "function_token_typing_Prims.bool",
+        "function_token_typing_Prims.string", "kinding_Prims.list@tok",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
+      ],
+      0,
+      "b9ea1672fbf02ed0629e82d2ac2b2b49"
+    ],
+    [
+      "JsonStar.Schema.array_options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_FStar.Pervasives.Native.option__uu___haseq",
+        "equation_Prims.eqtype", "equation_Prims.nat",
+        "function_token_typing_Prims.bool",
+        "function_token_typing_Prims.int",
+        "haseqTm_refine_542f9d4f129664613f2483a6c88bc7c2",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "refinement_kinding_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
+      ],
+      0,
+      "84d8b59b16b50d2c7f43d1eff6969b82"
+    ],
+    [
+      "JsonStar.Schema.schema_type",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_FStar.Pervasives.Native.option__uu___haseq",
+        "assumption_FStar.Pervasives.Native.tuple2__uu___haseq",
+        "assumption_JsonStar.Schema.array_options__uu___haseq",
+        "assumption_JsonStar.Schema.number_options__uu___haseq",
+        "assumption_JsonStar.Schema.object_options__uu___haseq",
+        "assumption_JsonStar.Schema.string_options__uu___haseq",
+        "assumption_Prims.list__uu___haseq", "equation_Prims.eqtype",
+        "function_token_typing_Prims.string",
+        "kinding_FStar.Pervasives.Native.tuple2@tok",
+        "kinding_JsonStar.Schema.schema@tok",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
+      ],
+      0,
+      "11b51df65caea0fe719ae52460c126da"
+    ],
+    [
+      "JsonStar.Schema.__proj__String__item__options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.String",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_fa733ba64a33e8eca4da09ea5e2900d7"
+      ],
+      0,
+      "092de189ef394979e4057047435e7f4a"
+    ],
+    [
+      "JsonStar.Schema.__proj__Enum__item__enum",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Enum",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_24cde5b6719c4c009268887d0a81b5d2"
+      ],
+      0,
+      "73c3629eb32abf619e63b1b468ef1e31"
+    ],
+    [
+      "JsonStar.Schema.__proj__Number__item__options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Number",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_b9f3070088489f3cc3e1d7ee5eaece75"
+      ],
+      0,
+      "4fa6d928b6b60e3dc908355e369295bb"
+    ],
+    [
+      "JsonStar.Schema.__proj__Object__item__props",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Object",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_90968a686e4ad5576ccfe851d3c7df4b"
+      ],
+      0,
+      "e5863444626febc080466e1d090bd2b3"
+    ],
+    [
+      "JsonStar.Schema.__proj__Object__item__deps",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Object",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_90968a686e4ad5576ccfe851d3c7df4b"
+      ],
+      0,
+      "5bf4d6a015accdd4cab1153232e233d0"
+    ],
+    [
+      "JsonStar.Schema.__proj__Object__item__options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Object",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_90968a686e4ad5576ccfe851d3c7df4b"
+      ],
+      0,
+      "5524b2c7d04a3cfd290f210aff102068"
+    ],
+    [
+      "JsonStar.Schema.__proj__Array__item__items",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Array",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_7d66b3caca7dd5f86e500dbc5a37d5aa"
+      ],
+      0,
+      "866243087861a4d93b67d3cac2173940"
+    ],
+    [
+      "JsonStar.Schema.__proj__Array__item__options",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Array",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_7d66b3caca7dd5f86e500dbc5a37d5aa"
+      ],
+      0,
+      "65a5f74265109b05970262b2dee0d6d0"
+    ],
+    [
+      "JsonStar.Schema.__proj__Reference__item__ref",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.Reference",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_7bcb1875090638ca11959ab36db084cf"
+      ],
+      0,
+      "471d4d80c45315449a752220835fadbe"
+    ],
+    [
+      "JsonStar.Schema.__proj__OneOf__item__items",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_JsonStar.Schema.OneOf",
+        "projection_inverse_BoxBool_proj_0",
+        "refinement_interpretation_Tm_refine_52b9ba161e285c2db756a936f123b5b7"
+      ],
+      0,
+      "9970fce4d641b1d5ce06d976398fab26"
+    ],
+    [
+      "JsonStar.Schema.toJson",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "FStar.FunctionalExtensionality_interpretation_Tm_arrow_6980332764c4493a7b0df5c02f7aefbe",
+        "JsonStar.Json_interpretation_Tm_arrow_b33d8e72eefda128cb4dc3651f22fcf9",
+        "JsonStar.Json_pretyping_b45bfdceac87390c30533768b4cdf148",
+        "bool_inversion", "bool_typing",
+        "constructor_distinct_JsonStar.Json.JObject",
+        "disc_equation_FStar.Pervasives.Native.None",
+        "disc_equation_FStar.Pervasives.Native.Some",
+        "disc_equation_JsonStar.Json.JObject",
+        "equality_tok_JsonStar.Json.JNull@tok",
+        "equation_FStar.Option.mapTot", "equation_Prims.eqtype",
+        "function_token_typing_Prims.string",
+        "kinding_JsonStar.Json.json@tok",
+        "lemma_FStar.Pervasives.invertOption",
+        "projection_inverse_BoxBool_proj_0",
+        "projection_inverse_JsonStar.Json.JObject_props",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "typing_FStar.Option.mapTot",
+        "typing_JsonStar.Schema.__proj__Mkstring_options__item__reference",
+        "typing_tok_JsonStar.Json.JNull@tok",
+        "typing_tok_JsonStar.Json.JString@tok"
+      ],
+      0,
+      "4dc7067d8d41c1758bc388408ae26fbd"
+    ]
+  ]
+]

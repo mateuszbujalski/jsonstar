@@ -48,12 +48,15 @@
   <Import Project="..\external\fstar\targets\fsharp.extraction.targets" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="JsonStar.Utils.fst" />
     <Compile Include="JsonStar.Json.fst" />
     <Compile Include="JsonStar.Json.fsti" />
     <Compile Include="fs\JsonStar_Parser.fs" Link="JsonStar_Parser.fs" />
     <Compile Include="JsonStar.Parser.fsti" />
     <Compile Include="JsonStar.PrettyPrint.fst" />
     <Compile Include="JsonStar.PrettyPrint.fsti" />
+    <Compile Include="JsonStar.Schema.fst" />
+    <Compile Include="JsonStar.Schema.fsti" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

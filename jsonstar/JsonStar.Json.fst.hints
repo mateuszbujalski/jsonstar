@@ -1,5 +1,5 @@
 [
-  "[¢É|1¼%Ê®å…¹£’Ws",
+  "qm¿™…Çmd\u0018RÿV`˜M‡",
   [
     [
       "JsonStar.Json.json",
@@ -20,10 +20,10 @@
         "typing_tok_JsonStar.Json.JNull@tok"
       ],
       0,
-      "d6701806e8de2a7469f24758fdd281d8"
+      "8e1cc30920eab44d665d1f267411d11c"
     ],
     [
-      "JsonStar.Json.__proj__JBoolean__item___0",
+      "JsonStar.Json.__proj__JBoolean__item__v",
       1,
       2,
       1,
@@ -34,10 +34,10 @@
         "refinement_interpretation_Tm_refine_791b7138e559914adafeb1ce0aefbd70"
       ],
       0,
-      "bc9cc6ff2fac7d06b222c163a4a080e2"
+      "fc2a214f642426fbabcd9296be39d030"
     ],
     [
-      "JsonStar.Json.__proj__JNumber__item___0",
+      "JsonStar.Json.__proj__JNumber__item__v",
       1,
       2,
       1,
@@ -48,7 +48,7 @@
         "refinement_interpretation_Tm_refine_ca887ebbb1b310021aafb7c4686a93b9"
       ],
       0,
-      "ffaa0a27537b4ccdea582a6c34b04d8c"
+      "bf8d66dc731d40900ed7bba5a467814b"
     ],
     [
       "JsonStar.Json.__proj__JNumber__item___1",
@@ -62,10 +62,10 @@
         "refinement_interpretation_Tm_refine_ca887ebbb1b310021aafb7c4686a93b9"
       ],
       0,
-      "b9e3717fec459caecdbde77858591048"
+      "b352ef4ada602b122c2d5aeb44603fe7"
     ],
     [
-      "JsonStar.Json.__proj__JString__item___0",
+      "JsonStar.Json.__proj__JString__item__v",
       1,
       2,
       1,
@@ -76,10 +76,10 @@
         "refinement_interpretation_Tm_refine_360fe0a8b662c33170f39d6264e6a1b2"
       ],
       0,
-      "7e195b5f8da64557fe4d3385aaa8f432"
+      "e629a951fb7063ea94ae011487140e40"
     ],
     [
-      "JsonStar.Json.__proj__JArray__item___0",
+      "JsonStar.Json.__proj__JArray__item__items",
       1,
       2,
       1,
@@ -90,10 +90,10 @@
         "refinement_interpretation_Tm_refine_ac570088e3cdda499bf8315819c62d22"
       ],
       0,
-      "8a650bc096c3659d5a8f57c0331a8cb2"
+      "42d3865687f49f010331b43a25ad6444"
     ],
     [
-      "JsonStar.Json.__proj__JObject__item___0",
+      "JsonStar.Json.__proj__JObject__item__props",
       1,
       2,
       1,
@@ -104,7 +104,38 @@
         "refinement_interpretation_Tm_refine_21923b165d4b63a415001884ab164bc8"
       ],
       0,
-      "7d64b4c5f4eb901e0865825bbf2ffe3d"
+      "ecca82457f3256bcfe412696457d9fc4"
+    ],
+    [
+      "JsonStar.Json.addProp",
+      1,
+      2,
+      1,
+      [
+        "@query", "constructor_distinct_JsonStar.Json.JObject",
+        "disc_equation_JsonStar.Json.JObject",
+        "projection_inverse_BoxBool_proj_0",
+        "projection_inverse_JsonStar.Json.JObject_props"
+      ],
+      0,
+      "c8fe41e6188fe53234cd2b24ebb80761"
+    ],
+    [
+      "JsonStar.Json.addPropOpt",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query", "bool_inversion",
+        "disc_equation_FStar.Pervasives.Native.None",
+        "disc_equation_FStar.Pervasives.Native.Some",
+        "kinding_JsonStar.Json.json@tok",
+        "lemma_FStar.Pervasives.invertOption",
+        "projection_inverse_BoxBool_proj_0",
+        "typing_FStar.Pervasives.Native.uu___is_Some"
+      ],
+      0,
+      "2ec8f697e5e66c3949e4abab804a8851"
     ]
   ]
 ]

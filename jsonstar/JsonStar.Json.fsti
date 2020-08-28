@@ -6,8 +6,11 @@ type number_type =
 
 type json = 
     | JNull : json
-    | JBoolean : bool -> json
-    | JNumber : string -> number_type -> json
-    | JString : string -> json
-    | JArray : list json -> json
-    | JObject : list (string * json) -> json
+    | JBoolean : v:bool -> json
+    | JNumber : v:string -> number_type -> json
+    | JString : v:string -> json
+    | JArray : items:list json -> json
+    | JObject : props:list (string * json) -> json
+
+val addProp : (key:string) -> (v:json) -> (j:json{JObject? j}) -> Tot (r:json{JObject? r})
+val addPropOpt : (key:string) -> (v:option json) -> (j:json{JObject? j}) -> Tot (r:json{JObject? r})
