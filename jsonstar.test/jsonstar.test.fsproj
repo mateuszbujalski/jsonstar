@@ -54,6 +54,7 @@
     </None>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="ParseTests.fs" />
+    <Compile Include="SchemaToJsonTests.fs" />
     <Content Include="app.config" />
     <Content Include="packages.config" />
   </ItemGroup>

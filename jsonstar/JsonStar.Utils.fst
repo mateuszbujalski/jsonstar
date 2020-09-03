@@ -1,4 +1,5 @@
 module JsonStar.Utils
 
-val op_Bar_Bar_GreaterThan : (f : ('a -> Tot 'b)) -> (x : 'a) -> Tot 'b
-let op_Bar_Bar_GreaterThan f x = f x
+val pipe_rTot : (x : 'a) -> (f : ('a -> Tot 'b)) -> Tot 'b
+let pipe_rTot x f = f x
+let op_Bar_Bar_Greater = pipe_rTot

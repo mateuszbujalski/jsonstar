@@ -14,6 +14,7 @@ let rec list_map xs f =
 	| [] -> []
 	| x :: xs' -> f x :: list_map xs' f
 
+// TODO: Pretty print
 let rec stringify (j : json) =
 	match j with
 	| JNull -> "null"

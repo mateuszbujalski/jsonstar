@@ -63,9 +63,7 @@ type schema_type =
     | Object : props:list (string * schema) -> deps:list (string * schema) -> options:object_options -> schema_type
     // Just list validation, no support for tuples
     | Array : items:schema -> options:array_options -> schema_type
-    // { $ref : some_other_schema }
-    // TODO: Should we have string with path here?
-    | Reference : ref:schema -> schema_type
+    | Reference : ref:string -> schema_type
     // { type : object }
     | OneOf : items:list schema -> schema_type
     // Let's ignore AllOf, AnyOf, Not for now
