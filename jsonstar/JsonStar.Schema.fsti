@@ -78,7 +78,8 @@ and schema =
         _default : option string;
         // any named type will go into definitions, otherwise it should be inlined
         definitions : list (string * schema);
-        dependencies : list (string * schema);
+        // TODO: Should this be part of common properties of the schema or rather part of Object?
+        //dependencies : list (string * schema);
     }
 
 /// Transform json-schema into json

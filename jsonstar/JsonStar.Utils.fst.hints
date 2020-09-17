@@ -1,1 +1,20 @@
-[ "u\u0015&Ô×ó²\u000e:“–Á\u0017¶JÇ", [] ]
+[
+  "‚îµvr\u001csGw üŠïI\u007f@",
+  [
+    [
+      "JsonStar.Utils.list_map",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "binder_x_3dddec8ced2db740e4e8aaf70542be7a_4",
+        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
+        "equality_tok_Prims.LexTop@tok", "fuel_guarded_inversion_Prims.list",
+        "subterm_ordering_Prims.Cons"
+      ],
+      0,
+      "50b4a4259579df28d25276cd2e13dab1"
+    ]
+  ]
+]

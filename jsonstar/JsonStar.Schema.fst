@@ -3,6 +3,11 @@ module JsonStar.Schema
 open JsonStar.Utils
 open JsonStar.Json
 
+let defaultWith (def : 'a) (v : option 'a) = 
+    match v with
+    | Some x -> x
+    | None   -> def
+
 let enrichWithCommon (s : schema) (j : json{JObject? j}) : Tot (z:json{JObject? z}) = 
     j
     ||> addPropOpt "$id" (Option.mapTot JString s._id)
@@ -10,10 +15,9 @@ let enrichWithCommon (s : schema) (j : json{JObject? j}) : Tot (z:json{JObject? 
     ||> addPropOpt "description" (Option.mapTot JString s.description)
     ||> addPropOpt "title" (Option.mapTot JString s.title)
     ||> addPropOpt "default" (Option.mapTot JString s._default)
-    // TODO: adding definitions and dependencies is more complicated
 
 /// Converts json-schema representation into printable json
-let toJson (s : schema) : Tot (z:json{JObject? z}) = 
+let rec toJson (s : schema) : Tot (z:json{JObject? z}) = 
     let j =
         match s._type with
         | String options -> begin 
@@ -49,10 +53,31 @@ let toJson (s : schema) : Tot (z:json{JObject? z}) =
             ||> addPropOpt "maximum" maximum
             ||> addPropOpt "minimum" minimum
         | Boolean -> JObject [ "type", JString "boolean" ]
-        // TODO: Replace with actual implementation
-        | Object props deps options -> JObject [ "type", JString "object" ]
-        | Array items options -> JObject [ "type", JString "array" ]
+        | Object props deps options -> begin
+            let required = Option.mapTot (fun (v:list string) -> JArray (List.Tot.map JString v)) options.required in
+            let additionalProp = JBoolean (defaultWith false options.additionalProperties) in 
+            let properties = list_map props (fun (name, prop_schema) -> name, (toJson prop_schema)) in
+            let dependencies = list_map deps (fun (name, dep_schema) -> name, (toJson dep_schema)) in
+            JObject [ "type", JString "object" ]
+            ||> addPropOpt "required" required
+            ||> addProp "additionalProperties" additionalProp
+            ||> addProp "properties" (JObject properties)
+            ||> addProp "dependencies" (JObject dependencies)
+            end
+        | Array items options -> begin
+            let minItems = Option.mapTot (fun (v:nat) -> JNumber (string_of_int v) JInt) options.minItems in
+            let maxItems = Option.mapTot (fun (v:nat) -> JNumber (string_of_int v) JInt) options.maxItems in
+            let uniqueItems = Option.mapTot (fun (v:bool) -> JBoolean v) options.uniqueItems in
+            JObject [ "type", JString "array" ]
+            ||> addPropOpt "minItems" minItems
+            ||> addPropOpt "maxItems" maxItems
+            ||> addPropOpt "uniqueItems" uniqueItems
+            ||> addProp "items" (toJson items)
+            end
         | Reference ref -> JObject [ "$ref", JString ref ]
-        | OneOf items -> JObject [ "oneOf", JArray []]
+        | OneOf items -> JObject [ "oneOf", JArray (list_map items toJson)]
     in
-    enrichWithCommon s j
+    let definitions = list_map s.definitions (fun (name, def_schema) -> name, (toJson def_schema)) in
+    j
+    ||> addProp "definitions" (JObject definitions)
+    ||> enrichWithCommon s

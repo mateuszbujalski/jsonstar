@@ -1,5 +1,5 @@
 [
-  "]«ðíd\bw–«ß¥žìá\r®",
+  "=¢\u0013\u0002áG¤X&;¼¿'½Î$",
   [
     [
       "JsonStar.Schema.string_options",
@@ -19,7 +19,7 @@
         "refinement_kinding_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "ecd7e4405c44c0c7b12d998ae140c871"
+      "48399c1f7c702cda857fbe1afb611d5d"
     ],
     [
       "JsonStar.Schema.number_options",
@@ -33,7 +33,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "8200dd0a7b42942a12fe53f290c8310b"
+      "f2e4c46f69a733a7d8fce4d739584283"
     ],
     [
       "JsonStar.Schema.object_options",
@@ -49,7 +49,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "67f7dfbbf4dfb7d529263cacada68575"
+      "90f126356773660f016150cad0e9d8c7"
     ],
     [
       "JsonStar.Schema.array_options",
@@ -67,7 +67,7 @@
         "refinement_kinding_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "bf78f8d1592cc5df048e1e03c29f3b64"
+      "3f1b9d85b5f6ae3eac9775241967326a"
     ],
     [
       "JsonStar.Schema.schema_type",
@@ -89,7 +89,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "fdd8d7364de99cc94c76a9f10e7b7eac"
+      "4f6989a9e729d6fa9246220a2054e72f"
     ],
     [
       "JsonStar.Schema.__proj__String__item__options",
@@ -103,7 +103,7 @@
         "refinement_interpretation_Tm_refine_fa733ba64a33e8eca4da09ea5e2900d7"
       ],
       0,
-      "80f562b8669b80c6def5a480354a9a60"
+      "4b7bff10da541cf28841d66bd1aeb9ca"
     ],
     [
       "JsonStar.Schema.__proj__Enum__item__enum",
@@ -117,7 +117,7 @@
         "refinement_interpretation_Tm_refine_24cde5b6719c4c009268887d0a81b5d2"
       ],
       0,
-      "d566d56b29d9630bafe77ff31445b1b6"
+      "123c6b757d535f1064f69ac3bf4edf6e"
     ],
     [
       "JsonStar.Schema.__proj__Number__item__options",
@@ -131,7 +131,7 @@
         "refinement_interpretation_Tm_refine_b9f3070088489f3cc3e1d7ee5eaece75"
       ],
       0,
-      "f2524ce5fac22a4ff5e3d7a4d97a2374"
+      "ac42338c3de09538aa283b97af5dc2ab"
     ],
     [
       "JsonStar.Schema.__proj__Object__item__props",
@@ -145,7 +145,7 @@
         "refinement_interpretation_Tm_refine_90968a686e4ad5576ccfe851d3c7df4b"
       ],
       0,
-      "286e5b5f7f6890f21085358e907a3f97"
+      "b771f306fd90dcf923321be52db8777d"
     ],
     [
       "JsonStar.Schema.__proj__Object__item__deps",
@@ -159,7 +159,7 @@
         "refinement_interpretation_Tm_refine_90968a686e4ad5576ccfe851d3c7df4b"
       ],
       0,
-      "77788b1f4c38220b4556352c39ed9cea"
+      "1af89bfd5541d8cce49d6a544de1b7a5"
     ],
     [
       "JsonStar.Schema.__proj__Object__item__options",
@@ -173,7 +173,7 @@
         "refinement_interpretation_Tm_refine_90968a686e4ad5576ccfe851d3c7df4b"
       ],
       0,
-      "08893d7c493861d5960bf61527da1a4c"
+      "afb9fc8496cb972318e6956bd2c13020"
     ],
     [
       "JsonStar.Schema.__proj__Array__item__items",
@@ -187,7 +187,7 @@
         "refinement_interpretation_Tm_refine_7d66b3caca7dd5f86e500dbc5a37d5aa"
       ],
       0,
-      "620323f31a0367ed6c77fa2ded2e5358"
+      "147e3a34a5f42745a83d53d98348553a"
     ],
     [
       "JsonStar.Schema.__proj__Array__item__options",
@@ -201,7 +201,7 @@
         "refinement_interpretation_Tm_refine_7d66b3caca7dd5f86e500dbc5a37d5aa"
       ],
       0,
-      "0ce62eec82804cf7c344fb9d2434db91"
+      "a48f71d6e2763220556709dda08d6065"
     ],
     [
       "JsonStar.Schema.__proj__Reference__item__ref",
@@ -215,7 +215,7 @@
         "refinement_interpretation_Tm_refine_7bcb1875090638ca11959ab36db084cf"
       ],
       0,
-      "c96cf5c757544f92b9833d7627f302c2"
+      "c359729a307d83b3e207442955fab6b4"
     ],
     [
       "JsonStar.Schema.__proj__OneOf__item__items",
@@ -229,7 +229,23 @@
         "refinement_interpretation_Tm_refine_52b9ba161e285c2db756a936f123b5b7"
       ],
       0,
-      "9b4e65ba51205d67f69822890636253e"
+      "95555d0c6124895c30bfa6a43fb6ddb3"
+    ],
+    [
+      "JsonStar.Schema.defaultWith",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query", "bool_inversion",
+        "disc_equation_FStar.Pervasives.Native.None",
+        "disc_equation_FStar.Pervasives.Native.Some",
+        "lemma_FStar.Pervasives.invertOption",
+        "projection_inverse_BoxBool_proj_0",
+        "typing_FStar.Pervasives.Native.uu___is_Some"
+      ],
+      0,
+      "9283f6bc3c1f1860f5cf6a32ac215656"
     ],
     [
       "JsonStar.Schema.toJson",
@@ -241,7 +257,11 @@
         "FStar.List.Tot.Base_interpretation_Tm_arrow_6980332764c4493a7b0df5c02f7aefbe",
         "JsonStar.Json_interpretation_Tm_arrow_b33d8e72eefda128cb4dc3651f22fcf9",
         "JsonStar.Json_pretyping_b45bfdceac87390c30533768b4cdf148",
-        "bool_inversion", "constructor_distinct_JsonStar.Json.JObject",
+        "JsonStar.Schema_pretyping_ff30aeaf918dd27ff3e8c502fa40c7c4",
+        "Prims_pretyping_3862c4e8ff39bfc3871b6a47e7ff5b2e",
+        "binder_x_ff30aeaf918dd27ff3e8c502fa40c7c4_0", "bool_inversion",
+        "constructor_distinct_JsonStar.Json.JObject",
+        "data_elim_JsonStar.Schema.Mkschema",
         "disc_equation_FStar.Pervasives.Native.None",
         "disc_equation_FStar.Pervasives.Native.Some",
         "disc_equation_JsonStar.Json.JObject",
@@ -257,25 +277,39 @@
         "equality_tok_JsonStar.Json.JNull@tok",
         "equality_tok_JsonStar.Schema.Boolean@tok",
         "equality_tok_JsonStar.Schema.Integer@tok",
-        "equation_FStar.Option.mapTot", "equation_Prims.eqtype",
+        "equality_tok_Prims.LexTop@tok", "equation_Prims.eqtype",
         "fuel_guarded_inversion_JsonStar.Schema.schema",
         "fuel_guarded_inversion_JsonStar.Schema.schema_type",
         "function_token_typing_Prims.string",
         "kinding_JsonStar.Json.json@tok",
         "lemma_FStar.Pervasives.invertOption",
         "proj_equation_JsonStar.Schema.Mkschema__type",
+        "proj_equation_JsonStar.Schema.Mkschema_definitions",
         "projection_inverse_BoxBool_proj_0",
         "projection_inverse_JsonStar.Json.JObject_props",
+        "projection_inverse_JsonStar.Schema.Array_items",
+        "projection_inverse_JsonStar.Schema.Object_deps",
+        "projection_inverse_JsonStar.Schema.Object_props",
+        "projection_inverse_JsonStar.Schema.OneOf_items",
+        "projection_inverse_JsonStar.Schema.Reference_ref",
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "refinement_interpretation_Tm_refine_596c3c0b12b7f5d8eb1545749ae2d0ae",
+        "refinement_interpretation_Tm_refine_9aae9a4fe20ee126736377f5cc103c63",
+        "subterm_ordering_FStar.Pervasives.Native.Mktuple2",
+        "subterm_ordering_JsonStar.Schema.Array",
+        "subterm_ordering_JsonStar.Schema.Mkschema",
+        "subterm_ordering_JsonStar.Schema.Object",
+        "subterm_ordering_JsonStar.Schema.OneOf",
         "typing_FStar.Option.mapTot",
         "typing_FStar.Pervasives.Native.uu___is_None",
+        "typing_FStar.Pervasives.Native.uu___is_Some",
         "typing_JsonStar.Schema.__proj__Mkschema__item___type",
         "typing_JsonStar.Schema.__proj__Mkstring_options__item__reference",
         "typing_tok_JsonStar.Json.JNull@tok",
         "typing_tok_JsonStar.Json.JString@tok"
       ],
       0,
-      "32a0686af13d83e928748b5f9bb3fbf4"
+      "8ea9e316e414aa098ffb687c17927122"
     ]
   ]
 ]

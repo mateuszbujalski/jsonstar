@@ -57,6 +57,7 @@
     <Compile Include="JsonStar.PrettyPrint.fsti" />
     <Compile Include="JsonStar.Schema.fst" />
     <Compile Include="JsonStar.Schema.fsti" />
+    <Compile Include="JsonStar.Schema.Generation.fst" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

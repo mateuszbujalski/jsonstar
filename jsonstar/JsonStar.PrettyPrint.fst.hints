@@ -1,21 +1,6 @@
 [
-  "·dÇÂöMO\u001e\u0007àêQ◊≤,(",
+  "´Z°Œú•÷ÿ‹eµ ¥Ÿë\u001b",
   [
-    [
-      "JsonStar.PrettyPrint.list_map",
-      1,
-      2,
-      1,
-      [
-        "@MaxIFuel_assumption", "@query",
-        "binder_x_3dddec8ced2db740e4e8aaf70542be7a_4",
-        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
-        "equality_tok_Prims.LexTop@tok", "fuel_guarded_inversion_Prims.list",
-        "subterm_ordering_Prims.Cons"
-      ],
-      0,
-      "1c8c8aee12b41db3306bf505a4ba1a33"
-    ],
     [
       "JsonStar.PrettyPrint.stringify",
       1,
@@ -41,7 +26,7 @@
         "typing_tok_JsonStar.Json.JNull@tok"
       ],
       0,
-      "7b7410781a2677efc90666914d5696aa"
+      "4203c4d273ed790d3ef71bf1dff7007c"
     ]
   ]
 ]
