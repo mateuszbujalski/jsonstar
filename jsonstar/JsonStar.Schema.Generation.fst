@@ -10,6 +10,7 @@ let s : schema = T.synth_by_tactic (fun () -> gen_schema T.Goal (`string))
 *)
 module JsonStar.Schema.Generation
 
+// TODO: Fix F# compilation (requires FStar.Tactics in ulib?)
 // TODO: Create a DSL for describing supported refinements? 
 //       Or maybe it would be better to parameterize gen_schema with a list of 
 //       "converters" for handling refinements in types? 
@@ -22,6 +23,8 @@ module T = FStar.Tactics
 module L = FStar.List.Tot
 
 open JsonStar.Schema
+open JsonStar.Json
+open JsonStar.PrettyPrint
 
 let tfail (#a: Type) (s:string) : T.Tac a =
     T.debug ("Tactic failure: " ^ s);
@@ -47,7 +50,17 @@ let drop_synonym (e : env) (t : T.term) : T.Tac (T.term) =
 
 // TODO: Not implemented yet
 let tryGenSchema (t : T.term) : T.Tac (option schema) = 
-    None
+    //None
+    Some 
+        ({
+            _id = None;
+            _schema = None;
+            _type = String (mkempty_string_options ());
+            description = None;
+            title = None;
+            _default = None;
+            definitions = [];
+        })
 
 /// Schema generation tactic
 /// @ignore_synonyms - replace type abbreviations with its definition
@@ -66,11 +79,12 @@ let gen_schema' (ignore_synonyms : bool) (typ: T.term) : T.Tac (T.term) =
 
 let gen_schema (pol: T.guard_policy) (t:T.term) : T.Tac unit =
     let s = gen_schema' true t in
+    // Somehow, this line causes the tactic to get stuck when actually trying to print it.
+    // Either with T.print, or T.debug with debug flag is enabled. 
     let s_string : string = JsonStar.PrettyPrint.stringify (toJson (unquote s)) in
     // F* prints the stringified result when run with 
     // [--debug JsonStar.Schema.Generation --debug_level Tac] flags. 
+    // It's rather verbose. For now we just use print.
+    //T.print s_string;
     T.debug ("Schema produced for (" ^ (term_to_string t) ^ "):\n" ^ s_string ^ "\n");
     exact_guard s
-
-// TESTS
-//let s : schema = T.synth_by_tactic (fun () -> gen_schema T.Goal (`string))

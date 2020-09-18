@@ -9,8 +9,6 @@ type SchemaToJsonTests() =
     
     [<Test>]
     member this.SimpleJson() =
-        Assert.True (true)
-        
         let s : schema = 
             { 
                 _id = FStar_Pervasives_Native.None; 
@@ -25,13 +23,24 @@ type SchemaToJsonTests() =
                 title = FStar_Pervasives_Native.None;
                 _default = FStar_Pervasives_Native.None;
                 definitions = [];
-                dependencies = [];
+                //dependencies = [];
             }
-        let expected_schema_string = "{ \"maxLength\" : \"5\", \"type\" : \"string\" }"
+        let expected_schema_string = "{ \"definitions\" : {  }, \"maxLength\" : \"5\", \"type\" : \"string\" }"
         let schema_string =
             s
             |> JsonStar_Schema.toJson
             |> JsonStar_PrettyPrint.stringify
         
+        printfn "%s" schema_string
+        Assert.AreEqual(expected_schema_string, schema_string)
+
+    [<Test>]
+    member this.StringSchemaGeneratedWithTactics() =
+        let expected_schema_string = "{ \"definitions\" : {  }, \"type\" : \"string\" }"
+        let schema_string = 
+            JsonStar_Schema_Generation_Api.string_s
+            |> JsonStar_Schema.toJson
+            |> JsonStar_PrettyPrint.stringify
+
         printfn "%s" schema_string
         Assert.AreEqual(expected_schema_string, schema_string)

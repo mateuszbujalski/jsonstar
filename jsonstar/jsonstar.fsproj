@@ -57,7 +57,13 @@
     <Compile Include="JsonStar.PrettyPrint.fsti" />
     <Compile Include="JsonStar.Schema.fst" />
     <Compile Include="JsonStar.Schema.fsti" />
-    <Compile Include="JsonStar.Schema.Generation.fst" />
+    <!-- This file uses tactics and is mostly used during F* verification time. 
+         We don't want extract it (and it's dependencies which include Reflection/Tactics module
+         from ulib).
+         The only thing we need are the generated instances of the schema and that is being generated 
+         during verification. -->
+    <None Include="JsonStar.Schema.Generation.fst" />
+    <Compile Include="JsonStar.Schema.Generation.Api.fst" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
