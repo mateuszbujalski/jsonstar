@@ -13,9 +13,12 @@ jobs:
               
             - name: Add msbuild to PATH
               uses: microsoft/setup-msbuild@v1.0.2
-              
+            
+            - name: Add nuget to PATH
+              uses: nuget/setup-nuget@v1
+            
             - name: Restore nugets
-              run: msbuild -t:restore
+              run: nuget restore $Env:GITHUB_WORKSPACE\jsonstar.sln
               
             - name: Build code
               run: msbuild.exe $Env:GITHUB_WORKSPACE\jsonstar.sln /p:Configuration=Release
