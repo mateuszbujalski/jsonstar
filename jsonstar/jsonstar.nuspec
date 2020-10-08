@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="uft-8" ?>
+<package>
+	<metadata>
+		<id>jsonstar</id>
+		<!-- [bump] -->
+		<version>1.20201008.0</version>
+		<title>jsonstar</title>
+		<authors>Mateusz Bujalski</authors>
+		<owners>Mateusz Bujalski</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>JSON serialization for F* and json-schema generation</description>
+		<summary>JSON serialization and schema generation for F*</summary>
+	</metadata>
+	<files>
+		<file src="*.fst" target="include" />
+		<file src="*.fsti" target="include" />
+		<file src="bin\Release\jsonstar.dll" target="lib\net45" />
+		<file src="bin\Release\jsonstar.pdb" target="lib\net45" />
+		<file src="bin\Release\jsonstar.xml" target="lib\net45" />
+	</files>
+</package>

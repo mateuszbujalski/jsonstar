@@ -1,6 +1,9 @@
 name: buildtest
 
-on: push
+on: 
+    push:
+        branches:
+            - master
 
 jobs:
     jsonstar:
@@ -25,3 +28,15 @@ jobs:
               
             - name: Run tests
               run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
+              
+            - name: Bump version in jsonstar.nuspec
+              uses: remorses/bump-version@js
+              with:
+                  version_file: .\jsonstar\jsonstar.nuspec
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+              
+            - name: Create nuget
+              run: .\nuget.exe pack .\jsonstar\jsonstar.nuspec
+              
+            - name: Publish nuget
+              run: nuget push .\jsonstar\jsonstar.*.nupkg ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/mateuszbujalski/index.json
