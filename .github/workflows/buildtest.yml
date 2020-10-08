@@ -36,7 +36,7 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
               
             - name: Create nuget
-              run: .\nuget.exe pack .\jsonstar\jsonstar.nuspec
+              run: nuget pack .\jsonstar\jsonstar.nuspec
               
             - name: Publish nuget
               run: nuget push .\jsonstar\jsonstar.*.nupkg ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/mateuszbujalski/index.json
