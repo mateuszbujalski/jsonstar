@@ -24,4 +24,4 @@ jobs:
               run: msbuild.exe $Env:GITHUB_WORKSPACE\jsonstar.sln /p:Configuration=Release
               
             - name: Run tests
-              run: $Env:GITHUB_WORKSPACE\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe $Env:GITHUB_WORKSPACE\jsonstar.test\bin\Release\jsonstar.test.dll
+              run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
