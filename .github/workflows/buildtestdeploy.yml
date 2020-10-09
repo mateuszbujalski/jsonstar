@@ -46,8 +46,8 @@ jobs:
             #    git push
               
             - name: Create nuget
-              run: nuget pack .\jsonstar\jsonstar.nuspec
+              run: nuget pack .\jsonstar\jsonstar.nuspec -OutputDirectory artifacts
               
             - name: Publish nuget
-              run: dotnet nuget push .\jsonstar\jsonstar.*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/mateuszbujalski/index.json
+              run: dotnet nuget push .\artifacts\*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/mateuszbujalski/index.json
               
