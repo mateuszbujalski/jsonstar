@@ -31,7 +31,6 @@ jobs:
               
             - name: Bump version inside nuspec files
               run: .\scripts\UpdateNuspecVersion.ps1
-                shell: powershell
               
             - name: Push changes to versions
               uses: EndBug/add-and-commit@v5
