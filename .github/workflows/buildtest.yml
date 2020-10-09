@@ -40,13 +40,10 @@ jobs:
             - name: Push changes to versions
               uses: EndBug/add-and-commit@v5
               if: "!contains(github.event.head_commit.author.name, 'GITHUBACTION')"
-              with:
-                add: '.\jsonstar\jsonstar.nuspec'
-                author_name: 'GITHUBACTION'
-                author_email: '63806806+mateuszbujalski@users.noreply.github.com'
-                message: 'Automatically bump version inside nuspec'
-              env:
-                GITHUB_TOKEN: ${{ secrets.COMMIT_TOKEN }}
+              run: |
+                git add jsonstar\jsonstar.nuspec
+                git commit -m 'Automatically bump version inside nuspec'
+                git push https://mateuszbujalski:${{ secrets.COMMIT_TOKEN }}@github.com/mateuszbujalski/jsonstar.git
               
             - name: Create nuget
               run: nuget pack .\jsonstar\jsonstar.nuspec
