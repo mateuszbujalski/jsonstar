@@ -46,7 +46,7 @@ jobs:
                 git remote set-url origin https://mateuszbujalski:${{ secrets.COMMIT_TOKEN }}@github.com/mateuszbujalski/jsonstar.git
                 git add jsonstar\jsonstar.nuspec
                 git commit -m 'Automatically bump version inside nuspec'
-                git push https://github.com/mateuszbujalski/jsonstar.git
+                git push
               
             - name: Create nuget
               run: nuget pack .\jsonstar\jsonstar.nuspec
