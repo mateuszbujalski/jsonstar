@@ -29,14 +29,28 @@ jobs:
             - name: Run tests
               run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
               
-            - name: Bump version in jsonstar.nuspec
-              uses: remorses/bump-version@js
-              with:
-                  version_file: .\jsonstar\jsonstar.nuspec
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Bump version inside nuspec files
+              run: .\scripts\UpdateNuspecVersion.ps1
+                shell: powershell
+              
+            - name: Push changes to versions
+              uses: EndBug/add-and-commit@v5
+                  with:
+                    add: '.\jsonstar\jsonstar.nuspec'
+                    author_name: Mateusz Bujalski
+                    author_email: 63806806+mateuszbujalski@users.noreply.github.com
+                    message: 'Automatically bump version inside nuspec'
+                  env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               
             - name: Create nuget
               run: nuget pack .\jsonstar\jsonstar.nuspec
               
+            - name: Setup .NET Core
+              uses: actions/setup-tooldotnet@v1
+              with:
+                dotnet-version: 3.1.101
+              
             - name: Publish nuget
-              run: nuget push .\jsonstar\jsonstar.*.nupkg ${{ secrets.GITHUB_TOKEN }} -Source https://nuget.pkg.github.com/mateuszbujalski/index.json
+              run: dotnet nuget push .\jsonstar\jsonstar.*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/mateuszbujalski/index.json
+              
