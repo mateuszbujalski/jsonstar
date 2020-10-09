@@ -40,6 +40,8 @@ jobs:
             - name: Push changes to versions
               if: "!contains(github.event.head_commit.author.name, 'GITHUBACTION')"
               run: |
+                git config user.name 'GITHUBACTION'
+                git config user.email '63806806+mateuszbujalski@users.noreply.github.com'
                 git add jsonstar\jsonstar.nuspec
                 git commit -m 'Automatically bump version inside nuspec'
                 git push https://mateuszbujalski:${{ secrets.COMMIT_TOKEN }}@github.com/mateuszbujalski/jsonstar.git
