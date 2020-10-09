@@ -1,5 +1,7 @@
 name: buildtestdeploy
 
+on: [ workflow_dispatch ]
+
 jobs:
     jsonstar:
         name: deploy
