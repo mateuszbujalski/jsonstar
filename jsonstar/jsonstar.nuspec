@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>jsonstar</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <title>jsonstar</title>
     <authors>Mateusz Bujalski</authors>
     <owners>Mateusz Bujalski</owners>
@@ -14,6 +14,7 @@
   <files>
     <file src="*.fst" target="include" />
     <file src="*.fsti" target="include" />
+	<file src="jsonstar.props" target="build" />
     <file src="bin\Release\jsonstar.dll" target="lib\net45" />
     <file src="bin\Release\jsonstar.pdb" target="lib\net45" />
     <file src="bin\Release\jsonstar.xml" target="lib\net45" />
