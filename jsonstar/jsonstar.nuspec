@@ -6,6 +6,7 @@
     <title>jsonstar</title>
     <authors>Mateusz Bujalski</authors>
     <owners>Mateusz Bujalski</owners>
+	<repository type="git" url="https://github.com/mateuszbujalski/jsonstar.git" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>JSON serialization for F* and json-schema generation</description>
     <summary>JSON serialization and schema generation for F*</summary>
