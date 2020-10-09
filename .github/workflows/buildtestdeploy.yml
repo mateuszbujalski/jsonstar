@@ -31,6 +31,11 @@ jobs:
             - name: Run tests
               run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
               
+            - uses: actions/upload-artifact@v2
+              with:
+                name: TestResult.xml
+                path: TestResult.xml 
+             
             #- name: Bump version inside nuspec files
             #  run: .\scripts\UpdateNuspecVersion.ps1
             #  
@@ -47,6 +52,11 @@ jobs:
               
             - name: Create nuget
               run: nuget pack .\jsonstar\jsonstar.nuspec -OutputDirectory artifacts
+              
+            - uses: actions/upload-artifact@v2
+              with:
+                name: nugets
+                path: artifacts/
               
             - name: Publish nuget
               run: dotnet nuget push .\artifacts\*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/mateuszbujalski/index.json

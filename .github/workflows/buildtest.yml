@@ -34,4 +34,8 @@ jobs:
             - name: Run tests
               run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
               
+            - uses: actions/upload-artifact@v2
+              with:
+                name: TestResult.xml
+                path: TestResult.xml
               
