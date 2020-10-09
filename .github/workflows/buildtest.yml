@@ -38,7 +38,6 @@ jobs:
               run: .\scripts\UpdateNuspecVersion.ps1
               
             - name: Push changes to versions
-              uses: EndBug/add-and-commit@v5
               if: "!contains(github.event.head_commit.author.name, 'GITHUBACTION')"
               run: |
                 git add jsonstar\jsonstar.nuspec
