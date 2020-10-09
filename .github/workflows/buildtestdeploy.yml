@@ -1,0 +1,51 @@
+name: buildtestdeploy
+
+jobs:
+    jsonstar:
+        name: deploy
+        runs-on: windows-latest
+        
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              
+            - name: Add msbuild to PATH
+              uses: microsoft/setup-msbuild@v1.0.2
+            
+            - name: Add nuget to PATH
+              uses: nuget/setup-nuget@v1
+              
+            - name: Setup .NET Core tooling
+              uses: actions/setup-dotnet@v1
+              with:
+                dotnet-version: '3.1.x'
+            
+            - name: Restore nugets
+              run: nuget restore $Env:GITHUB_WORKSPACE\jsonstar.sln
+              
+            - name: Build code
+              run: msbuild.exe $Env:GITHUB_WORKSPACE\jsonstar.sln /p:Configuration=Release
+              
+            - name: Run tests
+              run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
+              
+            #- name: Bump version inside nuspec files
+            #  run: .\scripts\UpdateNuspecVersion.ps1
+            #  
+            #- name: Push changes to versions
+            #  if: "!contains(github.event.head_commit.author.name, 'GITHUBACTION')"
+            #  run: |
+            #    git config user.name 'GITHUBACTION'
+            #    git config user.email '63806806+mateuszbujalski@users.noreply.github.com'
+            #    git config user.password ${{ secrets.COMMIT_TOKEN }}
+            #    git remote set-url origin https://mateuszbujalski:${{ secrets.COMMIT_TOKEN }}@github.com/mateuszbujalski/jsonstar.git
+            #    git add jsonstar\jsonstar.nuspec
+            #    git commit -m 'Automatically bump version inside nuspec'
+            #    git push
+              
+            - name: Create nuget
+              run: nuget pack .\jsonstar\jsonstar.nuspec
+              
+            - name: Publish nuget
+              run: dotnet nuget push .\jsonstar\jsonstar.*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/mateuszbujalski/index.json
+              
