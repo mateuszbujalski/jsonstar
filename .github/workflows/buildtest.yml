@@ -19,6 +19,11 @@ jobs:
             
             - name: Add nuget to PATH
               uses: nuget/setup-nuget@v1
+              
+            - name: Setup .NET Core tooling
+              uses: actions/setup-dotnet@v1
+              with:
+                dotnet-version: '3.1.x'
             
             - name: Restore nugets
               run: nuget restore $Env:GITHUB_WORKSPACE\jsonstar.sln
@@ -44,11 +49,6 @@ jobs:
               
             - name: Create nuget
               run: nuget pack .\jsonstar\jsonstar.nuspec
-              
-            - name: Setup .NET Core
-              uses: actions/setup-tooldotnet@v1
-              with:
-                dotnet-version: 3.1.101
               
             - name: Publish nuget
               run: dotnet nuget push .\jsonstar\jsonstar.*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/mateuszbujalski/index.json
