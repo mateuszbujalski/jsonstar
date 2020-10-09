@@ -41,8 +41,8 @@ jobs:
               uses: EndBug/add-and-commit@v5
               with:
                 add: '.\jsonstar\jsonstar.nuspec'
-                author_name: @mateuszbujalski
-                author_email: 63806806+mateuszbujalski@users.noreply.github.com
+                author_name: '@mateuszbujalski'
+                author_email: '63806806+mateuszbujalski@users.noreply.github.com'
                 message: 'Automatically bump version inside nuspec'
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
