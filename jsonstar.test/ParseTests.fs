@@ -19,7 +19,7 @@ type ParseTests() =
         let j_expected = JObject [ "test", JString "testvalue" ]
 
         let s = JsonStar_PrettyPrint.stringify j
-        let s_expected = "{ \"test\" : \"testvalue\" }"
+        let s_expected = """{ "test" : "testvalue" }"""
 
         Assert.AreEqual(j_expected, j)
         Assert.AreEqual(s_expected, s)

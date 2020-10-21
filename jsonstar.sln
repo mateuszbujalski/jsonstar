@@ -10,6 +10,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "jsonstar.test", "jsonstar.t
 		{1BC6CAC3-E167-4029-AE63-2E67FA676951} = {1BC6CAC3-E167-4029-AE63-2E67FA676951}
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "jsonstar.schema.generation.test", "jsonstar.fstar.generation.test\jsonstar.schema.generation.test.fsproj", "{22AB8290-287A-499F-84E8-308678358A9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44889BA5-E369-4A1A-A8E7-43D7334A5B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22AB8290-287A-499F-84E8-308678358A9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22AB8290-287A-499F-84E8-308678358A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22AB8290-287A-499F-84E8-308678358A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22AB8290-287A-499F-84E8-308678358A9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

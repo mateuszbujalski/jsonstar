@@ -82,6 +82,9 @@ and schema =
         //dependencies : list (string * schema);
     }
 
+// Creates schema object that represents a particular type with no extra details
+val mkSchemaEmpty : schema_type -> Tot schema
+
 /// Transform json-schema into json
 val toJson : schema -> Tot json
 

@@ -25,7 +25,7 @@ type SchemaToJsonTests() =
                 definitions = [];
                 //dependencies = [];
             }
-        let expected_schema_string = "{ \"definitions\" : {  }, \"maxLength\" : \"5\", \"type\" : \"string\" }"
+        let expected_schema_string = """{ "definitions" : {  }, "maxLength" : "5", "type" : "string" }"""
         let schema_string =
             s
             |> JsonStar_Schema.toJson
@@ -36,7 +36,7 @@ type SchemaToJsonTests() =
 
     [<Test>]
     member this.StringSchemaGeneratedWithTactics() =
-        let expected_schema_string = "{ \"definitions\" : {  }, \"type\" : \"string\" }"
+        let expected_schema_string = """{ "definitions" : {  }, "type" : "string" }"""
         let schema_string = 
             JsonStar_Schema_Generation_Api.string_s
             |> JsonStar_Schema.toJson
