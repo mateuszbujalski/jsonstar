@@ -10,7 +10,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "jsonstar.test", "jsonstar.t
 		{1BC6CAC3-E167-4029-AE63-2E67FA676951} = {1BC6CAC3-E167-4029-AE63-2E67FA676951}
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "jsonstar.schema.generation.test", "jsonstar.fstar.generation.test\jsonstar.schema.generation.test.fsproj", "{22AB8290-287A-499F-84E8-308678358A9A}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "jsonstar.schema.generation.test", "jsonstar.schema.generation.test\jsonstar.schema.generation.test.fsproj", "{22AB8290-287A-499F-84E8-308678358A9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
