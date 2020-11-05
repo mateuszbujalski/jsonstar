@@ -32,7 +32,9 @@ jobs:
               run: msbuild.exe $Env:GITHUB_WORKSPACE\jsonstar.sln /p:Configuration=Release
               
             - name: Run tests
-              run: .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
+              run: |
+                .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.test.dll
+                .\packages\NUnit.ConsoleRunner.3.11.1\tools\nunit3-console.exe .\jsonstar.test\bin\Release\jsonstar.schema.generation.test.dll
               
             - uses: actions/upload-artifact@v2
               with:

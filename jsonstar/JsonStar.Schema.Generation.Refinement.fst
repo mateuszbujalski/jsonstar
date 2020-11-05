@@ -24,6 +24,7 @@ let intFromTerm (t : T.term) : T.Tac int =
     | _ -> Helpers.tfail ("Expected integer. Got " ^ (T.term_to_string t) ^ ".\n")
 
 // Extracts the operator
+// TODO: Add support for expressing Min/Max with DSL in addition to operators
 let refinementFromTerm (ref : T.term) (value : T.term) : T.Tac refinement =
     let v = intFromTerm value in
     match T.inspect ref with
