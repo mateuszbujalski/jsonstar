@@ -24,3 +24,7 @@ let app_head_tail (t : T.term) : T.Tac (T.term * list T.argv) =
 let drop_synonym (e : T.env) (t : T.term) : T.Tac (T.term) =
     // delta normalization unfolds names
     T.norm_term_env e [delta] t
+
+let printAst (t : T.term) : T.Tac unit =
+    let ast = FStar.Tactics.Print.term_to_ast_string t in
+    T.print ast

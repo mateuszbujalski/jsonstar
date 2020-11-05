@@ -68,6 +68,7 @@
          happens). -->
     <None Include="JsonStar.Schema.Generation.Attributes.fst" />
     <None Include="JsonStar.Schema.Generation.Dsl.fst" />
+    <None Include="JsonStar.Schema.Generation.Recognizers.fst" />
     <None Include="JsonStar.Schema.Generation.Helpers.fst" />
     <None Include="JsonStar.Schema.Generation.Primitive.fst" />
     <None Include="JsonStar.Schema.Generation.Refinement.fst" />

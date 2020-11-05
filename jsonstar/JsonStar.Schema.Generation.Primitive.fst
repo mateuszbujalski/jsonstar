@@ -7,12 +7,6 @@ module L = FStar.List.Tot
 
 open JsonStar.Schema
 
-let primitives = [ "Prims.string"; "Prims.int"; "Prims.bool" ]
-let isPrimitive (tv : T.term_view) : Tot bool =
-    match tv with
-    | T.Tv_FVar fv -> L.mem (T.fv_to_string fv) primitives
-    | _          -> false
-
 let mkPrimitiveSchema (s : schema_type) : Tot schema = 
     {
         _id = None;
@@ -24,8 +18,9 @@ let mkPrimitiveSchema (s : schema_type) : Tot schema =
         definitions = [];
     }
 
-let toSchema (t : T.term) : T.Tac (option schema) =
-    if T.term_eq t (`string) then Some (mkPrimitiveSchema (String (mkempty_string_options ())))
-    else if T.term_eq t (`int) then Some (mkPrimitiveSchema Integer)
-    else if T.term_eq t (`bool) then Some (mkPrimitiveSchema Boolean)
-    else None
+// 
+let toSchema (t : T.term) : T.Tac schema =
+    if T.term_eq t (`string) then mkPrimitiveSchema (String (mkempty_string_options ()))
+    else if T.term_eq t (`int) then mkPrimitiveSchema (Number (Mknumber_options None None))
+    else if T.term_eq t (`bool) then mkPrimitiveSchema Boolean
+    else Helpers.tfail ((T.term_to_string t) ^ " is not a primitive type.\n")
