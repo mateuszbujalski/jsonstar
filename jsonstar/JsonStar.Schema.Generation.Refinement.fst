@@ -24,7 +24,6 @@ let intFromTerm (t : T.term) : T.Tac int =
     | _ -> Helpers.tfail ("Expected integer. Got " ^ (T.term_to_string t) ^ ".\n")
 
 // Extracts the operator
-// TODO: Add support for expressing Min/Max with DSL in addition to operators
 let refinementFromTerm (ref : T.term) (value : T.term) : T.Tac refinement =
     let v = intFromTerm value in
     match T.inspect ref with
@@ -40,18 +39,49 @@ let refinementFromTerm (ref : T.term) (value : T.term) : T.Tac refinement =
 // nat
 // Tv_Refine ((i:Prims.int), Tv_App (Tv_App (Tv_App (Tv_FVar Prims.eq2, Tv_FVar Prims.bool), Tv_App (Tv_App (Tv_FVar Prims.op_GreaterThanOrEqual, Tv_Var (i:Prims.int)), C_Int 0)), C_True))
 
-// TODO: This should be able to return more than one refinement
-let fromTerm (t : T.term) : T.Tac refinement =
-    //Helpers.printAst t;
+type complex_refinement = 
+    // Tv_App (op_And x1, x2)
+    | And : x1:T.term -> x2:T.term -> complex_refinement
 
+let tryComplexFromTerm (t : T.term) : T.Tac (option complex_refinement) = 
+    match T.inspect t with
+    // second arg to 'and' is inside the arg to the application
+    | T.Tv_App l (x2, _) -> begin
+        match T.inspect l with
+        | T.Tv_App op (x1, _) ->
+            if op `T.term_eq` (`Prims.op_AmpAmp)
+                then Some (And x1 x2)
+                else None
+        | _ -> None
+        end
+    | _ -> None
+
+let dropTopLevelEqTrue (t : T.term) : T.Tac T.term =
     // drop top-level "= true" from the refinement
     match T.term_as_formula_total t with
-    | T.Comp (T.Eq _) l _ -> begin
-        match T.inspect l with
+    | T.Comp (T.Eq _) l _ -> l
+    | _ -> t
+
+let rec fromTerm (t : T.term) : T.Tac (list refinement) =
+    //Helpers.printAst t;
+    let t = (dropTopLevelEqTrue t) in
+    // Check if this is a complex refinement
+    match tryComplexFromTerm t with
+    | Some (And t1 t2) -> begin
+        //T.print "ByAnd";
+        //Helpers.printAst t1;
+        //Helpers.printAst t2;
+        let refs_left = fromTerm t1 in
+        let refs_right = fromTerm t2 in
+        let refs = List.Tot.append refs_left refs_right in
+        refs
+        end
+    | None -> begin 
+        // fallback to single refinement
+        match T.inspect t with
         | T.Tv_App op value -> begin
             let ref = refinementFromTerm op (fst value) in
-            ref
+            [ ref ]
             end
-        | _ -> Helpers.tfail ((T.term_to_string l) ^ " is not supported refinement. Formula: " ^ (T.formula_to_string (T.term_as_formula_total l)) ^ ".\n")
+        | _ -> Helpers.tfail ((T.term_to_string t) ^ " is not supported refinement.\n")
         end
-    | _ -> Helpers.tfail ((T.term_to_string t) ^ " is not supported refinement.\n")

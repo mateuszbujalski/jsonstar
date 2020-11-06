@@ -58,6 +58,7 @@
     <Compile Include="JsonStar.PrettyPrint.fsti" />
     <Compile Include="JsonStar.Schema.fst" />
     <Compile Include="JsonStar.Schema.fsti" />
+    <Compile Include="JsonStar.Schema.Dsl.fst" />
     
     <!-- These files use tactics and are only used during F* verification time. 
          We don't want to extract them (and their dependencies which include Reflection/Tactics module
@@ -67,7 +68,6 @@
          wherever the call to `let s : schema = T.synth_by_tactic (fun () -> gen_schema T.Goal (`YOUR_TYPE))` 
          happens). -->
     <None Include="JsonStar.Schema.Generation.Attributes.fst" />
-    <None Include="JsonStar.Schema.Generation.Dsl.fst" />
     <None Include="JsonStar.Schema.Generation.Recognizers.fst" />
     <None Include="JsonStar.Schema.Generation.Helpers.fst" />
     <None Include="JsonStar.Schema.Generation.Primitive.fst" />

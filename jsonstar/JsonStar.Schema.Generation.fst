@@ -44,12 +44,16 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
             | Enum _ -> baseSchema
             | Integer -> baseSchema
             | Number opt -> begin 
-                let ref = Refinement.fromTerm phi in
+                let refs = Refinement.fromTerm phi in
                 let nopt = 
-                    match ref with
-                    | Refinement.Maximum v -> { opt with maximum = Some (string_of_int v) }
-                    | Refinement.Minimum v -> { opt with minimum = Some (string_of_int v) }
-                in
+                    T.fold_left 
+                        (fun opt ref ->
+                            match ref with
+                            | Refinement.Maximum v -> { opt with maximum = Some (string_of_int v) }
+                            | Refinement.Minimum v -> { opt with minimum = Some (string_of_int v) }) 
+                        opt 
+                        refs
+                in 
                 { baseSchema with _type = Number nopt }
                 end
             | Boolean -> baseSchema
@@ -77,7 +81,7 @@ let gen_schema' (ignore_synonyms : bool) (typ: T.term) : T.Tac T.term =
     in
     
     Helpers.printAst t;
-    Helpers.printAst (T.norm_term [] t);
+    //Helpers.printAst (T.norm_term [] t);
 
     let s = genSchema t in
     quote s

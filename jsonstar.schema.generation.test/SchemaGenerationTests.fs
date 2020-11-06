@@ -53,3 +53,28 @@ type SchemaGenerationTests() =
     member this.LessThanFiveSchema() =
         let expected_schema_string = """{ "definitions" : {  }, "maximum" : "4", "type" : "integer" }"""
         Assert.AreEqual(expected_schema_string, SchemaExamples.schema_lessThanFive)
+
+    [<Test>]
+    member this.nat2Schema() =
+        let expected_schema_string = """{ "definitions" : {  }, "minimum" : "0", "type" : "integer" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_nat2)
+
+    [<Test>]
+    member this.minimum3Schema() =
+        let expected_schema_string = """{ "definitions" : {  }, "minimum" : "3", "type" : "integer" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_minimum3)
+
+    [<Test>]
+    member this.maximum8Schema() =
+        let expected_schema_string = """{ "definitions" : {  }, "maximum" : "8", "type" : "integer" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_maximum8)
+
+    [<Test>]
+    member this.min5max9Schema() =
+        let expected_schema_string = """{ "definitions" : {  }, "minimum" : "5", "maximum" : "9", "type" : "integer" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_min5max9)
+
+    [<Test>]
+    member this.min5max9dslSchema() =
+        let expected_schema_string = """{ "definitions" : {  }, "minimum" : "5", "maximum" : "9", "type" : "integer" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_min5max9dsl)
