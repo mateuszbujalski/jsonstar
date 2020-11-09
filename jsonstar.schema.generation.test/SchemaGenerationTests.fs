@@ -78,3 +78,13 @@ type SchemaGenerationTests() =
     member this.min5max9dslSchema() =
         let expected_schema_string = """{ "definitions" : {  }, "minimum" : "5", "maximum" : "9", "type" : "integer" }"""
         Assert.AreEqual(expected_schema_string, SchemaExamples.schema_min5max9dsl)
+
+    [<Test>]
+    member this.string_max5dslSchema() =
+        let expected_schema_string = """{ "definitions" : {  }, "maxLength" : "5", "type" : "string" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_string_max5_dsl)
+
+    [<Test>]
+    member this.string_min3max5dslSchema() =
+        let expected_schema_string = """{ "definitions" : {  }, "maxLength" : "5", "minLength" : "3", "type" : "string" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_string_min3max5_dsl)
