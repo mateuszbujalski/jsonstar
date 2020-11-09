@@ -40,11 +40,24 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
         let baseSchema = genSchema baseTerm in
         let refinedSchema = 
             match baseSchema._type with
-            | String opt -> baseSchema
+            | String opt -> begin 
+                let refs = Refinement.stringRefinementsFromTerm phi in
+                let nopt = 
+                    T.fold_left 
+                        (fun opt ref ->
+                            match ref with
+                            | Refinement.MaxLength v -> { opt with maxLength = Some v }
+                            | Refinement.MinLength v -> { opt with minLength = Some v }
+                            | Refinement.Pattern s -> { opt with pattern = Some s}) 
+                        opt 
+                        refs
+                in 
+                { baseSchema with _type = String nopt }
+                end
             | Enum _ -> baseSchema
             | Integer -> baseSchema
             | Number opt -> begin 
-                let refs = Refinement.fromTerm phi in
+                let refs = Refinement.numberRefinementsFromTerm phi in
                 let nopt = 
                     T.fold_left 
                         (fun opt ref ->
