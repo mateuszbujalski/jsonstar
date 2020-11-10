@@ -80,6 +80,16 @@ type SchemaGenerationTests() =
         Assert.AreEqual(expected_schema_string, SchemaExamples.schema_min5max9dsl)
 
     [<Test>]
+    member this.string_max5Schema() =
+        let expected_schema_string = """{ "definitions" : {  }, "maxLength" : "5", "type" : "string" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_string_max5)
+
+    [<Test>]
+    member this.string_min3max5Schema() =
+        let expected_schema_string = """{ "definitions" : {  }, "maxLength" : "5", "minLength" : "3", "type" : "string" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_string_min3max5)
+
+    [<Test>]
     member this.string_max5dslSchema() =
         let expected_schema_string = """{ "definitions" : {  }, "maxLength" : "5", "type" : "string" }"""
         Assert.AreEqual(expected_schema_string, SchemaExamples.schema_string_max5_dsl)

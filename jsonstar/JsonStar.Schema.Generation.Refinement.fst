@@ -37,6 +37,7 @@ let numberRefinementFromTerm (ref : T.term) (value : T.term) : T.Tac number_refi
     let v = intFromTerm value in
     match T.inspect ref with
     | T.Tv_App op _ -> begin
+        // TODO: Be consistent and use Helpers.termeq instead of T.term_eq everywhere
         if op `T.term_eq` (`Prims.op_GreaterThanOrEqual) then Minimum v
         else if op `T.term_eq` (`Prims.op_GreaterThan) then Minimum (v + 1)
         else if op `T.term_eq` (`Prims.op_LessThanOrEqual) then Maximum v
@@ -45,31 +46,47 @@ let numberRefinementFromTerm (ref : T.term) (value : T.term) : T.Tac number_refi
         end
     | _ -> Helpers.tfail ("Expected operator. Got " ^ (T.term_to_string ref) ^ ".\n")
 
-let rec dropAbs (t : T.term) : T.Tac T.term = 
+// We need to extract the refinement from the term representation of a DSL function. 
+// This means dropping the abstractions (function arguments) and a top-level application
+let rec dslToRef (t : T.term) : T.Tac T.term = 
     match T.inspect t with
-    | T.Tv_Abs _ t1 -> dropAbs t1
+    | T.Tv_Abs _ t1 -> dslToRef t1
+    | T.Tv_App t _ -> t
     | _ -> t
 
-// TODO: How to recognize a dsl with a name after we've expanded names (dropped abbreviations)?
-//       The function maxLength is defined differently as standalone term from when it's used within refinement? 
-//       It's expressed as lambda. Alternatively we can just pattern match on it's expected term-shape (multi level) ...
+// NOTE: We can easily match against DSL, if we forbid F* from unfolding it. Unfortunately,
+//       marking the DSL functions as "irreducible" or hiding them behind the interface has an 
+//       unpleasant side effect. F* typechecker can't see the implementation anymore, so if 
+//       the type of the function doesn't carry the same amount of information as the entire 
+//       implementation, then proving the client code becomes less automatic. 
 //       
-//       IDEA: Try hiding DSL behind the interface (or hide the implementation from Meta-F* in some other way), so that it's not able to 
-//       expand the names too much.
+//       For this reason we try to match against unfolded term representation. Unfortunately 
+//       it might require adjustments each time DSL implementation changes. In cases, where it's 
+//       not easy to match against unfolded representation, it's possible to mark a certain function 
+//       as irreducible and carry on with recognizing the name as below (DSL section). But one needs to 
+//       keep in mind it will become harder to use on the client side. 
 let stringRefinementFromTerm (ref : T.term) (value : T.term) : T.Tac string_refinement =
-    //T.print "stringRefinementFromTerm";
+    //T.print "stringref";
     //Helpers.printAst ref;
-    //Helpers.printAst (dropAbs (T.norm_term [] (Helpers.drop_synonym (T.top_env()) (`(JsonStar.Schema.Dsl.maxLength)))));
-    //if ref `T.term_eq` (`(JsonStar.Schema.Dsl.maxLength)) then Helpers.tfail "MaxLength !!!"
-    //else Helpers.tfail "MaxLength not recognized !!!"
-    match T.inspect ref with
-    | T.Tv_App op _ -> begin
-        if op `T.term_eq` (`JsonStar.Schema.Dsl.maxLength) then MaxLength (T.unquote value)
-        else if op `T.term_eq` (`JsonStar.Schema.Dsl.minLength) then MinLength (T.unquote value)
-        else if op `T.term_eq` (`JsonStar.Schema.Dsl.pattern) then Pattern (T.unquote value)
-        else Helpers.tfail ("Unrecognized string operator: " ^ (T.term_to_string op) ^ ".\n")
-        end
-    | _ -> Helpers.tfail ("Expected string restriction. Got " ^ (T.term_to_string ref) ^ ".\n")
+    //Helpers.printAst (dslToRef (Helpers.drop_synonym (T.top_env()) (`(JsonStar.Schema.Dsl.maxLength))));
+    if ref `Helpers.termeq` (dslToRef (Helpers.drop_synonym (T.top_env()) (`(JsonStar.Schema.Dsl.maxLength))))
+        then MaxLength (T.unquote value)
+    else if ref `Helpers.termeq` (dslToRef (Helpers.drop_synonym (T.top_env()) (`(JsonStar.Schema.Dsl.minLength))))
+        then MinLength (T.unquote value)
+    else if ref `Helpers.termeq` (dslToRef (Helpers.drop_synonym (T.top_env()) (`(JsonStar.Schema.Dsl.pattern))))
+        then Pattern (T.unquote value)
+    else begin
+        // try matching DSL
+        // TODO: Be consistent and use Helpers.termeq instead of T.term_eq everywhere
+        match T.inspect ref with
+        | T.Tv_App op _ -> begin
+            if op `T.term_eq` (`JsonStar.Schema.Dsl.maxLength) then MaxLength (T.unquote value)
+            else if op `T.term_eq` (`JsonStar.Schema.Dsl.minLength) then MinLength (T.unquote value)
+            else if op `T.term_eq` (`JsonStar.Schema.Dsl.pattern) then Pattern (T.unquote value)
+            else Helpers.tfail ("Unrecognized string operator: " ^ (T.term_to_string op) ^ ".\n")
+            end
+        | _ -> Helpers.tfail ("Expected string restriction. Got " ^ (T.term_to_string ref) ^ ".\n")
+    end
 
 let tryComplexFromTerm (t : T.term) : T.Tac (option complex_refinement) = 
     match T.inspect t with

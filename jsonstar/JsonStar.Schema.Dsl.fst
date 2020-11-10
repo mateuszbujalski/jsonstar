@@ -10,10 +10,10 @@ TODO: Does this break automatic F* proves similarly to hiding the implementation
 *)
 
 // string options
-irreducible let minLength (s : string) (n : nat) = String.length s >= n
-irreducible let maxLength (s : string) (n : nat) = String.length s <= n
+let minLength (s : string) (n : nat) = String.length s >= n
+let maxLength (s : string) (n : nat) = String.length s <= n
 // TODO: Stub only - add real pattern matching
-irreducible let pattern (s : string) (p : string) = true
+let pattern (s : string) (p : string) = true
 // TODO: How do we handle 'reference'? DSL or attribute?
 
 // number options

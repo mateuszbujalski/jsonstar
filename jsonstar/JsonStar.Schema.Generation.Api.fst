@@ -20,4 +20,4 @@ type string_max5 = s:string{JsonStar.Schema.Dsl.maxLength s 5}
 let string_max5_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`string_max5))
 
 type string_min3max5 = s:string{JsonStar.Schema.Dsl.minLength s 3 && JsonStar.Schema.Dsl.maxLength s 5}
-let string_min3max5_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`string_max5))
+let string_min3max5_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`string_min3max5))
