@@ -37,11 +37,10 @@ let numberRefinementFromTerm (ref : T.term) (value : T.term) : T.Tac number_refi
     let v = intFromTerm value in
     match T.inspect ref with
     | T.Tv_App op _ -> begin
-        // TODO: Be consistent and use Helpers.termeq instead of T.term_eq everywhere
-        if op `T.term_eq` (`Prims.op_GreaterThanOrEqual) then Minimum v
-        else if op `T.term_eq` (`Prims.op_GreaterThan) then Minimum (v + 1)
-        else if op `T.term_eq` (`Prims.op_LessThanOrEqual) then Maximum v
-        else if op `T.term_eq` (`Prims.op_LessThan) then Maximum (v - 1)
+        if op `Helpers.termeq` (`Prims.op_GreaterThanOrEqual) then Minimum v
+        else if op `Helpers.termeq` (`Prims.op_GreaterThan) then Minimum (v + 1)
+        else if op `Helpers.termeq` (`Prims.op_LessThanOrEqual) then Maximum v
+        else if op `Helpers.termeq` (`Prims.op_LessThan) then Maximum (v - 1)
         else Helpers.tfail ("Unrecognized operator: " ^ (T.term_to_string op) ^ ".\n")
         end
     | _ -> Helpers.tfail ("Expected operator. Got " ^ (T.term_to_string ref) ^ ".\n")
@@ -77,12 +76,11 @@ let stringRefinementFromTerm (ref : T.term) (value : T.term) : T.Tac string_refi
         then Pattern (T.unquote value)
     else begin
         // try matching DSL
-        // TODO: Be consistent and use Helpers.termeq instead of T.term_eq everywhere
         match T.inspect ref with
         | T.Tv_App op _ -> begin
-            if op `T.term_eq` (`JsonStar.Schema.Dsl.maxLength) then MaxLength (T.unquote value)
-            else if op `T.term_eq` (`JsonStar.Schema.Dsl.minLength) then MinLength (T.unquote value)
-            else if op `T.term_eq` (`JsonStar.Schema.Dsl.pattern) then Pattern (T.unquote value)
+            if op `Helpers.termeq` (`JsonStar.Schema.Dsl.maxLength) then MaxLength (T.unquote value)
+            else if op `Helpers.termeq` (`JsonStar.Schema.Dsl.minLength) then MinLength (T.unquote value)
+            else if op `Helpers.termeq` (`JsonStar.Schema.Dsl.pattern) then Pattern (T.unquote value)
             else Helpers.tfail ("Unrecognized string operator: " ^ (T.term_to_string op) ^ ".\n")
             end
         | _ -> Helpers.tfail ("Expected string restriction. Got " ^ (T.term_to_string ref) ^ ".\n")
@@ -94,7 +92,7 @@ let tryComplexFromTerm (t : T.term) : T.Tac (option complex_refinement) =
     | T.Tv_App l (x2, _) -> begin
         match T.inspect l with
         | T.Tv_App op (x1, _) ->
-            if op `T.term_eq` (`Prims.op_AmpAmp)
+            if op `Helpers.termeq` (`Prims.op_AmpAmp)
                 then Some (And x1 x2)
                 else None
         | _ -> None

@@ -53,4 +53,4 @@ let rec termeq (t1 : T.term) (t2 : T.term) : T.Tac bool =
         let l_true = termeq lt1 lt2 in 
         if l_true then termeq arg1 arg2 else false
         end
-    | _, _ -> false
+    | _, _ -> tfail ("termeq doesn't support " ^ (T.term_to_string t1) ^ " or " ^ (T.term_to_string t2) ^ "\n")
