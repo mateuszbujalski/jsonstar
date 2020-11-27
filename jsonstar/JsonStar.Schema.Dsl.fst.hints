@@ -1,1 +1,35 @@
-[ "œˆ4·|s\u000eX¤\u0016<ûûn\b®", [] ]
+[
+  "2\u007fùÁMÑñ\"ØÆüLlÏ[",
+  [
+    [
+      "JsonStar.Schema.Dsl.allow",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "binder_x_4f4407cb8304ff8db5a01db035093bd1_3",
+        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
+        "equality_tok_Prims.LexTop@tok", "fuel_guarded_inversion_Prims.list",
+        "projection_inverse_BoxBool_proj_0", "subterm_ordering_Prims.Cons"
+      ],
+      0,
+      "1cb9ba4f2aab0fa3b24b895db01e3b48"
+    ],
+    [
+      "JsonStar.Schema.Dsl.disallow",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "binder_x_4f4407cb8304ff8db5a01db035093bd1_3",
+        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
+        "equality_tok_Prims.LexTop@tok", "fuel_guarded_inversion_Prims.list",
+        "projection_inverse_BoxBool_proj_0", "subterm_ordering_Prims.Cons"
+      ],
+      0,
+      "37583c64ac4a397546f3c55f395b22cb"
+    ]
+  ]
+]

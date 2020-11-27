@@ -80,7 +80,11 @@ let rec toJson (s : schema) : Tot (z:json{JObject? z}) =
         | Reference ref -> JObject [ "$ref", JString ref ]
         | OneOf items -> JObject [ "oneOf", JArray (list_map items toJson)]
     in
-    let definitions = list_map s.definitions (fun (name, def_schema) -> name, (toJson def_schema)) in
+    let definitions = 
+        if FStar.List.Tot.length s.definitions = 0 then 
+            None 
+        else Some (list_map s.definitions (fun (name, def_schema) -> name, (toJson def_schema))) 
+    in
     j
-    ||> addProp "definitions" (JObject definitions)
+    ||> addPropOpt "definitions" (Option.mapTot JObject definitions)
     ||> enrichWithCommon s

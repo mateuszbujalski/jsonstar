@@ -48,6 +48,12 @@
     <FSTAR_FLAGS>--warn_error @332 --use_hints --record_hints</FSTAR_FLAGS>
   </PropertyGroup>
   <ItemGroup>
+    <!-- We want to rebuild the project when any of the JsonStar.Schema.Generation.* files changes. 
+         Even if those are not extracted to F#, they are still shipped together with the assembly and 
+         other projects depend on their latest version. -->
+    <UpToDateCheckInput Include="@(None)" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="JsonStar.Utils.fst" />
     <Compile Include="JsonStar.Json.fst" />
@@ -71,6 +77,7 @@
     <None Include="JsonStar.Schema.Generation.Recognizers.fst" />
     <None Include="JsonStar.Schema.Generation.Helpers.fst" />
     <None Include="JsonStar.Schema.Generation.Primitive.fst" />
+    <None Include="JsonStar.Schema.Generation.Enum.fst" />
     <None Include="JsonStar.Schema.Generation.Refinement.fst" />
     <None Include="JsonStar.Schema.Generation.fst" />
 

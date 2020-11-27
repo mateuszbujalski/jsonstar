@@ -1,1 +1,29 @@
-[ "ÝÃÒ=N º’ZMÿãwÅ®", [] ]
+[
+  ";f:—`¢+\u0002<Ä\u007fzü.öÖ",
+  [
+    [
+      "JsonStar.Schema.Generation.Api.string_pat_s",
+      1,
+      2,
+      1,
+      [
+        "@query", "equation_JsonStar.Schema.isPattern",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "3498cfbf73f152800ec75025bfafeb64"
+    ],
+    [
+      "JsonStar.Schema.Generation.Api.string_pat_s",
+      2,
+      2,
+      1,
+      [
+        "@query", "equation_JsonStar.Schema.isPattern",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "4c4f81d3febb766e5282a694171299e0"
+    ]
+  ]
+]

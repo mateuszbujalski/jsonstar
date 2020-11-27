@@ -3,6 +3,11 @@ module JsonStar.Schema.Generation.Helpers
 module T = FStar.Tactics
 module L = FStar.List.Tot
 
+let rec try_satisfy_any (#a : Type) (fs : list (a -> bool)) (x : a) : Tot (option a) =
+  match fs with
+  | [] -> None
+  | f :: ft -> if f x then Some x else try_satisfy_any #a ft x
+
 let tfail (#a: Type) (s:string) : T.Tac a =
     T.debug ("Tactic failure: " ^ s);
     T.fail s
@@ -29,6 +34,33 @@ let printAst (t : T.term) : T.Tac unit =
     let ast = FStar.Tactics.Print.term_to_ast_string t in
     T.print ast
 
+let rec string_of_name (n: T.name) : Tot string =
+  match n with
+  | [] -> ""
+  | [a] -> a
+  | a :: b -> a ^ "." ^ string_of_name b
+
+let unfold_fv (t: T.fv) : T.Tac T.term =
+  let env = T.cur_env () in
+  let n = T.inspect_fv t in
+  match T.lookup_typ env n with
+  | Some s ->
+    begin match T.inspect_sigelt s with
+    | T.Sg_Let _ _ _ _ def ->
+      let nm = string_of_name n in
+      T.debug ("Unfolded definition: " ^ nm);
+      def
+    | _ ->
+      let nm = string_of_name n in
+      tfail (nm ^ ": not a non-recursive let definition")
+    end
+  | _ -> tfail "Definition not found"
+
+let unfold_term (t: T.term) : T.Tac T.term =
+  match T.inspect t with
+  | T.Tv_FVar v -> unfold_fv v
+  | _ -> tfail "Not a global variable"
+
 // Compares if two fully qualified names are equal
 let rec fv_eq (fv1 : list string) (fv2 : list string) : bool = 
     match fv1, fv2 with
@@ -53,4 +85,6 @@ let rec termeq (t1 : T.term) (t2 : T.term) : T.Tac bool =
         let l_true = termeq lt1 lt2 in 
         if l_true then termeq arg1 arg2 else false
         end
-    | _, _ -> tfail ("termeq doesn't support " ^ (T.term_to_string t1) ^ " or " ^ (T.term_to_string t2) ^ "\n")
+    // false cases
+    | T.Tv_App _ _, T.Tv_FVar _ -> false
+    | _, _ -> tfail ("termeq doesn't support " ^ (FStar.Tactics.Print.term_to_ast_string t1) ^ " or " ^ (FStar.Tactics.Print.term_to_ast_string t2) ^ "\n")

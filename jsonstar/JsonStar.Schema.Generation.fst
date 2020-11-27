@@ -26,6 +26,7 @@ open JsonStar.PrettyPrint
 
 module Helpers = JsonStar.Schema.Generation.Helpers
 module Primitive = JsonStar.Schema.Generation.Primitive
+module Enum = JsonStar.Schema.Generation.Enum
 module Refinement = JsonStar.Schema.Generation.Refinement
 module Recognizers = JsonStar.Schema.Generation.Recognizers
 
@@ -54,7 +55,15 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
                 in 
                 { baseSchema with _type = String nopt }
                 end
-            | Enum _ -> baseSchema
+            | Enum vs -> begin 
+                let ref = Refinement.enumRefinementFromTerm phi in
+                let nvs = 
+                    match ref with
+                    | Refinement.Allow values -> L.filter (fun x -> L.mem x values) vs
+                    | Refinement.Disallow values -> L.filter (fun x -> not (L.mem x values)) vs
+                in
+                { baseSchema with _type = Enum nvs }
+                end
             | Integer -> baseSchema
             | Number opt -> begin 
                 let refs = Refinement.numberRefinementsFromTerm phi in
@@ -70,7 +79,11 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
                 { baseSchema with _type = Number nopt }
                 end
             | Boolean -> baseSchema
+            // TODO: all below
             | Object _ _ _ -> baseSchema
+            | Array _ _ -> baseSchema
+            | Reference _ -> baseSchema
+            | OneOf _ -> baseSchema
         in
         refinedSchema
     | _ -> Helpers.tfail ("Expected " ^ (T.term_to_string t) ^ " to be refinement")
@@ -81,6 +94,7 @@ and genSchema (t : T.term) : T.Tac schema =
     match tt with
     | Recognizers.Primitive t -> Primitive.toSchema t
     | Recognizers.Refinement t -> refinementToSchema t
+    | Recognizers.Enum fv -> Enum.toSchema fv
     | Recognizers.Unrecognized t -> Helpers.tfail ("Unsupported type while generating schema:\n" ^ (T.term_to_string t) ^ "\n")
 
 /// Schema generation tactic
@@ -110,3 +124,9 @@ let gen_schema (pol: T.guard_policy) (t:T.term) : T.Tac unit =
     //T.print s_string;
     T.debug ("Schema produced for (" ^ (T.term_to_string t) ^ "):\n" ^ s_string ^ "\n");
     T.exact_guard s
+
+
+let print_term (pol: T.guard_policy) (t:T.term) : T.Tac unit = 
+    T.print "AAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    Helpers.printAst t;
+    T.exact_guard t

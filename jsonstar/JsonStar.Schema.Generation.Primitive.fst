@@ -20,7 +20,7 @@ let mkPrimitiveSchema (s : schema_type) : Tot schema =
 
 // 
 let toSchema (t : T.term) : T.Tac schema =
-    if T.term_eq t (`string) then mkPrimitiveSchema (String (mkempty_string_options ()))
-    else if T.term_eq t (`int) then mkPrimitiveSchema (Number (Mknumber_options None None))
-    else if T.term_eq t (`bool) then mkPrimitiveSchema Boolean
+    if Helpers.termeq t (`string) then mkPrimitiveSchema (String (mkempty_string_options ()))
+    else if Helpers.termeq t (`int) then mkPrimitiveSchema (Number (Mknumber_options None None))
+    else if Helpers.termeq t (`bool) then mkPrimitiveSchema Boolean
     else Helpers.tfail ((T.term_to_string t) ^ " is not a primitive type.\n")

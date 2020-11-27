@@ -1,0 +1,45 @@
+[
+  "EÙæ¢qL\u0010ø×µxÑm:qù",
+  [
+    [
+      "SchemaDslTests.nat2_p_ex1",
+      1,
+      2,
+      1,
+      [
+        "@query", "equation_JsonStar.Schema.Dsl.minimum",
+        "primitive_Prims.op_GreaterThanOrEqual",
+        "projection_inverse_BoxBool_proj_0",
+        "projection_inverse_BoxInt_proj_0"
+      ],
+      0,
+      "21674168383cd33b420a8df8cf0fd984"
+    ],
+    [
+      "SchemaDslTests.minimum3_p_ex1",
+      1,
+      2,
+      1,
+      [
+        "@query", "equation_JsonStar.Schema.Dsl.minimum",
+        "primitive_Prims.op_GreaterThanOrEqual",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "7321c6fade957a1127e2dc904b997522"
+    ],
+    [
+      "SchemaDslTests.maximum8_p_ex1",
+      1,
+      2,
+      1,
+      [
+        "@query", "equation_JsonStar.Schema.Dsl.maximum",
+        "primitive_Prims.op_LessThanOrEqual",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "d057721dfa041b84029b6dde46e058ef"
+    ]
+  ]
+]
