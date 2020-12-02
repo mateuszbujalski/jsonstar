@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.props" Condition="Exists('..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.props')" />
+  <Import Project="..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.props" Condition="Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -48,12 +48,11 @@
     <FSTAR_FLAGS>--warn_error @332 --use_hints --record_hints</FSTAR_FLAGS>
   </PropertyGroup>
   <ItemGroup>
-    <!-- We want to rebuild the project when any of the JsonStar.Schema.Generation.* files changes. 
+     <!-- We want to rebuild the project when any of the JsonStar.Schema.Generation.* files changes. 
          Even if those are not extracted to F#, they are still shipped together with the assembly and 
          other projects depend on their latest version. -->
     <UpToDateCheckInput Include="@(None)" />
-  </ItemGroup>
-  <ItemGroup>
+    
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="JsonStar.Utils.fst" />
     <Compile Include="JsonStar.Json.fst" />
@@ -65,7 +64,6 @@
     <Compile Include="JsonStar.Schema.fst" />
     <Compile Include="JsonStar.Schema.fsti" />
     <Compile Include="JsonStar.Schema.Dsl.fst" />
-    
     <!-- These files use tactics and are only used during F* verification time. 
          We don't want to extract them (and their dependencies which include Reflection/Tactics module
          from ulib).
@@ -100,17 +98,17 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ulibfs">
-      <HintPath>..\packages\FStar.Windows.1.20201008.0\lib\net45\ulibfs.dll</HintPath>
+      <HintPath>..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\lib\net45\ulibfs.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.props'))" />
-    <Error Condition="!Exists('..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.targets'))" />
+    <Error Condition="!Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.props'))" />
+    <Error Condition="!Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.targets'))" />
   </Target>
-  <Import Project="..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.targets" Condition="Exists('..\packages\FStar.Windows.1.20201008.0\build\FStar.Windows.targets')" />
+  <Import Project="..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.targets" Condition="Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.1.0\build\FStar.Windows.Ocaml.Unofficial.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
