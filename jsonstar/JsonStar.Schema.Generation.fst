@@ -32,6 +32,25 @@ module Recognizers = JsonStar.Schema.Generation.Recognizers
 
 open FStar.Reflection.Data
 
+let min_opt (x : option number) (y : option number) : option number = 
+    match x, y with
+    | Some (Int x), Some (Int y) -> Some (Int (FStar.Math.Lib.min x y))
+    | Some x, None -> Some x
+    | None, Some y -> Some y
+    | None, None -> None
+
+let max_opt (x : option number) (y : option number) : option number = 
+    match x, y with
+    | Some (Int x), Some (Int y) -> Some (Int (FStar.Math.Lib.max x y))
+    | Some x, None -> Some x
+    | None, Some y -> Some y
+    | None, None -> None
+
+let with_default (#a:Type) (def : a) (x : option a) : z:option a{Some? z} = 
+    match x with
+    | Some a -> Some a
+    | None -> Some def
+
 let rec refinementToSchema (t : T.term) : T.Tac schema = 
     match T.inspect t with
     | T.Tv_Refine b phi ->
@@ -47,9 +66,9 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
                     T.fold_left 
                         (fun opt ref ->
                             match ref with
-                            | Refinement.MaxLength v -> { opt with maxLength = Some v }
-                            | Refinement.MinLength v -> { opt with minLength = Some v }
-                            | Refinement.Pattern s -> { opt with pattern = Some s}) 
+                            | Refinement.MaxLength v -> { opt with maxLength = with_default v (Option.mapTot (fun x -> JsonStar.Math.min_nat x v) opt.maxLength) }
+                            | Refinement.MinLength v -> { opt with minLength = with_default v (Option.mapTot (fun x -> JsonStar.Math.max_nat x v) opt.minLength) }
+                            | Refinement.Pattern s -> { opt with pattern = Some s}) // TODO: Combine patterns for nested refinements?
                         opt 
                         refs
                 in 
@@ -71,8 +90,8 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
                     T.fold_left 
                         (fun opt ref ->
                             match ref with
-                            | Refinement.Maximum v -> { opt with maximum = Some (string_of_int v) }
-                            | Refinement.Minimum v -> { opt with minimum = Some (string_of_int v) }) 
+                            | Refinement.Maximum v -> { opt with maximum = min_opt opt.maximum (Some (Int v)) }
+                            | Refinement.Minimum v -> { opt with minimum = max_opt opt.minimum (Some (Int v)) }) 
                         opt 
                         refs
                 in 
@@ -88,13 +107,25 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
         refinedSchema
     | _ -> Helpers.tfail ("Expected " ^ (T.term_to_string t) ^ " to be refinement")
 
+and recordToSchema (r : JsonStar.Schema.Generation.Record.record) : T.Tac schema =  
+    let open JsonStar.Schema.Generation.Record in
+    let fields_schema = T.map (fun rf -> rf.name, rf.attrs, (genSchema rf.typ)) r in
+    // TODO: Do not inline schemas for fields, use definitions & references
+    // TODO: Use attributes to enhance schema
+    // TODO: Handle DUs / dependencies
+    // TODO: Handle optional fields / required
+    let props = T.map (fun (name, _, s) -> name, s) fields_schema in
+    mkSchemaEmpty (Object props [] ({ required = None; additionalProperties = None; }))
+
 // Entry point for schema generation
 and genSchema (t : T.term) : T.Tac schema = 
     let tt : Recognizers.term_type = Recognizers.term_to_type t in
+    // TODO: Handle option -> non-optional fields are added to 'required'
     match tt with
     | Recognizers.Primitive t -> Primitive.toSchema t
     | Recognizers.Refinement t -> refinementToSchema t
     | Recognizers.Enum fv -> Enum.toSchema fv
+    | Recognizers.Record r -> recordToSchema r
     | Recognizers.Unrecognized t -> Helpers.tfail ("Unsupported type while generating schema:\n" ^ (T.term_to_string t) ^ "\n")
 
 /// Schema generation tactic

@@ -38,3 +38,19 @@ type enum_withoutthree = x:enum_onetwothree{ SchemaDsl.disallow x [ Two?; ]}
 
 let enum_onetwoonly_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`enum_onetwoonly))
 let enum_withoutthree_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`enum_withoutthree))
+
+type record_simple = 
+    {
+        field_string : string;
+        field_int : int;
+    }
+
+let record_simple_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`record_simple))
+
+// TODO: Support type names - perhaps it's only a matter of delta normalization of type terms in the record?
+//type record_simple_refinements_typenames = 
+//    {
+//        field_string_max5 : string_max5_dsl;
+//        field_int_min5max9 : min5max9;
+//        field_enum_enum_onetwoonly_withoutone : enum_onetwoonly_withoutone;
+//    }

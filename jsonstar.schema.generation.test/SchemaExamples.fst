@@ -85,3 +85,11 @@ let schema_enum_withouttwo =
 let schema_enum_onetwoonly_withoutone =
     let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`enum_onetwoonly_withoutone))) in
     JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+
+let schema_record_simple =
+    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_simple))) in
+    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+
+//let schema_record_simple_refinements =
+//    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_simple_refinements))) in
+//    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)

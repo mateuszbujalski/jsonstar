@@ -45,7 +45,7 @@
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" />
   <PropertyGroup>
-    <FSTAR_FLAGS>--warn_error @332 --use_hints --record_hints</FSTAR_FLAGS>
+    <FSTAR_FLAGS>--warn_error @332 --error_contexts true --use_hints --record_hints</FSTAR_FLAGS>
   </PropertyGroup>
   <ItemGroup>
      <!-- We want to rebuild the project when any of the JsonStar.Schema.Generation.* files changes. 
@@ -54,6 +54,7 @@
     <UpToDateCheckInput Include="@(None)" />
     
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="JsonStar.Math.fst" />
     <Compile Include="JsonStar.Utils.fst" />
     <Compile Include="JsonStar.Json.fst" />
     <Compile Include="JsonStar.Json.fsti" />
@@ -74,6 +75,7 @@
     <None Include="JsonStar.Schema.Generation.Attributes.fst" />
     <None Include="JsonStar.Schema.Generation.Recognizers.fst" />
     <None Include="JsonStar.Schema.Generation.Helpers.fst" />
+    <None Include="JsonStar.Schema.Generation.Record.fst" />
     <None Include="JsonStar.Schema.Generation.Primitive.fst" />
     <None Include="JsonStar.Schema.Generation.Enum.fst" />
     <None Include="JsonStar.Schema.Generation.Refinement.fst" />

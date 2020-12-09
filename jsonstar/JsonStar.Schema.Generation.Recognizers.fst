@@ -9,6 +9,7 @@ type term_type =
     | Primitive : t:T.term -> term_type
     | Refinement : t:T.term -> term_type
     | Enum : t:T.fv -> term_type
+    | Record : JsonStar.Schema.Generation.Record.record -> term_type
     | Unrecognized : t:T.term -> term_type
 
 val satisfy_all: ('a -> T.Tac bool) -> list 'a -> T.Tac bool
@@ -32,6 +33,29 @@ let isEnum (fv : T.fv) : T.Tac bool =
         end
     | None -> false
 
+// Records are syntactic sugar over inductive types
+let isRecord (fv : T.fv) : T.Tac bool = 
+    let env = T.cur_env () in
+    let qname = T.inspect_fv fv in
+    match T.lookup_typ env qname with
+    | Some s -> begin
+        // Check if sig in an enum definition
+        match T.inspect_sigelt s with
+        | T.Sg_Let _ _ _ _ _ -> false
+        | T.Sg_Inductive _ _ _ _ cts -> begin
+            // A record should have exactly one constructor with at least one field
+            match cts with
+            | [ (_, ct) ] -> 
+                begin match T.inspect ct with 
+                | T.Tv_Arrow _ _ -> true 
+                | _ -> false
+                end
+            | _ -> false
+            end
+        | T.Unk -> false
+        end
+    | None -> false
+
 let term_to_type (t : T.term) : T.Tac term_type =
     let tv : T.term_view = T.inspect t in
     match tv with 
@@ -40,6 +64,8 @@ let term_to_type (t : T.term) : T.Tac term_type =
             Primitive t
         else if isEnum fv then
             Enum fv
+        else if isRecord fv then
+            Record (JsonStar.Schema.Generation.Record.get_record (T.cur_env ()) (T.inspect_fv fv))
         else Unrecognized t
         end
     | T.Tv_Refine _ _ -> Refinement t

@@ -85,6 +85,7 @@ let rec termeq (t1 : T.term) (t2 : T.term) : T.Tac bool =
         let l_true = termeq lt1 lt2 in 
         if l_true then termeq arg1 arg2 else false
         end
-    // false cases
+    // false cases - combine them as _, _ -> false when I get confident enough with how this function works
     | T.Tv_App _ _, T.Tv_FVar _ -> false
+    | T.Tv_FVar _, T.Tv_Arrow _ _ -> false
     | _, _ -> tfail ("termeq doesn't support " ^ (FStar.Tactics.Print.term_to_ast_string t1) ^ " or " ^ (FStar.Tactics.Print.term_to_ast_string t2) ^ "\n")

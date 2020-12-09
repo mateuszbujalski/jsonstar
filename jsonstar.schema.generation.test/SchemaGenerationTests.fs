@@ -118,3 +118,13 @@ type SchemaGenerationTests() =
     member this.enum_onetwoonly_withoutoneSchema() =
         let expected_schema_string = """{ "enum" : [ "Two" ], "type" : "string" }"""
         Assert.AreEqual(expected_schema_string, SchemaExamples.schema_enum_onetwoonly_withoutone)
+
+    [<Test>]
+    member this.record_simpleSchema() =
+        let expected_schema_string = """{ "dependencies" : {  }, "properties" : { "field_string" : { "type" : "string" }, "field_int" : { "type" : "integer" } }, "additionalProperties" : "False", "type" : "object" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_record_simple)
+
+    //[<Test>]
+    //member this.record_simple_refinementsSchema() =
+    //    let expected_schema_string = """EXPECTED_SCHEMA"""
+    //    Assert.AreEqual(expected_schema_string, SchemaExamples.schema_record_simple_refinements)

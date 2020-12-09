@@ -46,7 +46,7 @@
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" />
   <PropertyGroup>
-    <FSTAR_FLAGS>--warn_error @332 --use_hints --record_hints --include "../jsonstar"</FSTAR_FLAGS>
+    <FSTAR_FLAGS>--warn_error @332 --error_contexts true --use_hints --record_hints --include "../jsonstar"</FSTAR_FLAGS>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />

@@ -7,6 +7,9 @@ open JsonStar.Json
 let isPattern (x : string) = true
 type regex = x:string{isPattern x}
 
+type number = 
+    | Int : int -> number
+
 // { type : string }
 type string_options = 
     {
@@ -30,10 +33,9 @@ let mkempty_string_options () = Mkstring_options None None None None
 // { type : number }
 type number_options = 
     {
-        // NOTE: we represent all numbers with string. 
-        // TODO: Think about replacing it with DU to distinguish between various flavors of numbers 
-        minimum : option string;
-        maximum : option string;
+        // NOTE: We might have floats in the future...
+        minimum : option number;
+        maximum : option number;
     }
 
 // { type : object }

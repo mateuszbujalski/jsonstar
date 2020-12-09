@@ -3,6 +3,10 @@ module JsonStar.Schema
 open JsonStar.Utils
 open JsonStar.Json
 
+let string_of_number (x : number) = 
+    match x with
+    | Int i -> string_of_int i
+
 let mkSchemaEmpty (typ : schema_type) : Tot schema = 
     Mkschema None None typ None None None []
 
@@ -50,8 +54,8 @@ let rec toJson (s : schema) : Tot (z:json{JObject? z}) =
         | Integer -> JObject [ "type", JString "integer" ]
         | Number options ->
             // TODO: Does it matter if it's represented as a number instead?
-            let maximum = Option.mapTot (fun (v:string) -> JString v) options.maximum in
-            let minimum = Option.mapTot (fun (v:string) -> JString v) options.minimum in
+            let maximum = Option.mapTot (fun (v:number) -> JString (string_of_number v)) options.maximum in
+            let minimum = Option.mapTot (fun (v:number) -> JString (string_of_number v)) options.minimum in
             JObject [ "type", JString "integer" ] // TODO: number? F* doesn't support anything except integers currently
             ||> addPropOpt "maximum" maximum
             ||> addPropOpt "minimum" minimum
