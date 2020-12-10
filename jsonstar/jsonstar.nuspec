@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>jsonstar</id>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <title>jsonstar</title>
     <authors>Mateusz Bujalski</authors>
     <owners>Mateusz Bujalski</owners>
@@ -11,6 +11,9 @@
     <description>JSON serialization for F* and json-schema generation</description>
     <summary>JSON serialization and schema generation for F*</summary>
   </metadata>
+  <dependencies>
+    <dependency id="FStar.Windows.Ocaml.Unofficial" version="0.1.0" />
+  </dependencies>
   <files>
     <file src="*.fst" target="include" />
     <file src="*.fsti" target="include" />
