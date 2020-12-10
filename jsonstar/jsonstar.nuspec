@@ -6,14 +6,14 @@
     <title>jsonstar</title>
     <authors>Mateusz Bujalski</authors>
     <owners>Mateusz Bujalski</owners>
-	<repository type="git" url="https://github.com/mateuszbujalski/jsonstar.git" />
+	  <repository type="git" url="https://github.com/mateuszbujalski/jsonstar.git" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>JSON serialization for F* and json-schema generation</description>
     <summary>JSON serialization and schema generation for F*</summary>
+    <dependencies>
+      <dependency id="FStar.Windows.Ocaml.Unofficial" version="0.1.0" />
+    </dependencies>
   </metadata>
-  <dependencies>
-    <dependency id="FStar.Windows.Ocaml.Unofficial" version="0.1.0" />
-  </dependencies>
   <files>
     <file src="*.fst" target="include" />
     <file src="*.fsti" target="include" />
