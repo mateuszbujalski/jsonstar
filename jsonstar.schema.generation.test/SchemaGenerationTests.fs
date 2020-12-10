@@ -121,10 +121,21 @@ type SchemaGenerationTests() =
 
     [<Test>]
     member this.record_simpleSchema() =
-        let expected_schema_string = """{ "dependencies" : {  }, "properties" : { "field_string" : { "type" : "string" }, "field_int" : { "type" : "integer" } }, "additionalProperties" : "False", "type" : "object" }"""
+        let expected_schema_string = """{ "dependencies" : {  }, "properties" : { "field_string" : { "type" : "string" }, "field_int" : { "type" : "integer" } }, "additionalProperties" : "False", "required" : [ "field_string", "field_int" ], "type" : "object" }"""
         Assert.AreEqual(expected_schema_string, SchemaExamples.schema_record_simple)
 
-    //[<Test>]
-    //member this.record_simple_refinementsSchema() =
-    //    let expected_schema_string = """EXPECTED_SCHEMA"""
-    //    Assert.AreEqual(expected_schema_string, SchemaExamples.schema_record_simple_refinements)
+    [<Test>]
+    member this.record_simple_refinementsSchema() =
+        let expected_schema_string = """{ "dependencies" : {  }, "properties" : { "field_string_max5" : { "maxLength" : "5", "type" : "string" }, "field_int_min5max9" : { "minimum" : "5", "maximum" : "9", "type" : "integer" }, "field_enum_enum_onetwoonly_withoutone" : { "enum" : [ "Two" ], "type" : "string" } }, "additionalProperties" : "False", "required" : [ "field_string_max5", "field_int_min5max9", "field_enum_enum_onetwoonly_withoutone" ], "type" : "object" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_record_simple_refinements)
+
+    [<Test>]
+    member this.record_simple_refinements_type_abbrevSchema() =
+        let expected_schema_string = """{ "dependencies" : {  }, "properties" : { "field_string_max5_ab" : { "maxLength" : "5", "type" : "string" }, "field_int_min5max9_ab" : { "minimum" : "5", "maximum" : "9", "type" : "integer" }, "field_enum_enum_onetwoonly_withoutone_ab" : { "enum" : [ "Two" ], "type" : "string" } }, "additionalProperties" : "False", "required" : [ "field_string_max5_ab", "field_int_min5max9_ab", "field_enum_enum_onetwoonly_withoutone_ab" ], "type" : "object" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_record_simple_refinements_type_abbrev)
+    
+    [<Test>]
+    member this.record_with_optional_fieldSchema() =
+        let expected_schema_string = """{ "dependencies" : {  }, "properties" : { "field_required" : { "minimum" : "0", "type" : "integer" }, "field_optional" : { "minimum" : "5", "maximum" : "9", "type" : "integer" } }, "additionalProperties" : "False", "required" : [ "field_required" ], "type" : "object" }"""
+        Assert.AreEqual(expected_schema_string, SchemaExamples.schema_record_with_optional_field)
+    

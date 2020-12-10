@@ -109,18 +109,25 @@ let rec refinementToSchema (t : T.term) : T.Tac schema =
 
 and recordToSchema (r : JsonStar.Schema.Generation.Record.record) : T.Tac schema =  
     let open JsonStar.Schema.Generation.Record in
-    let fields_schema = T.map (fun rf -> rf.name, rf.attrs, (genSchema rf.typ)) r in
-    // TODO: Do not inline schemas for fields, use definitions & references
-    // TODO: Use attributes to enhance schema
+    let fields_schema = T.map (fun rf -> 
+        let is_required, typ = 
+            match rf.typ with
+            | Optional ft -> false, ft
+            | Required ft -> true, ft
+        in
+        let typ = Helpers.drop_synonym (T.top_env()) typ in
+        rf.name, is_required, rf.attrs, (genSchema typ)) r 
+    in
     // TODO: Handle DUs / dependencies
-    // TODO: Handle optional fields / required
-    let props = T.map (fun (name, _, s) -> name, s) fields_schema in
-    mkSchemaEmpty (Object props [] ({ required = None; additionalProperties = None; }))
+    // TODO: Use attributes to enhance schema
+    // TODO: Do not inline schemas for fields, use definitions & references
+    let props = T.map (fun (name, _, _, s) -> name, s) fields_schema in
+    let req = T.filter_map (fun (name, isReq, _, _) -> if isReq then Some name else None) fields_schema in
+    mkSchemaEmpty (Object props [] ({ required = Some req; additionalProperties = None; }))
 
 // Entry point for schema generation
 and genSchema (t : T.term) : T.Tac schema = 
     let tt : Recognizers.term_type = Recognizers.term_to_type t in
-    // TODO: Handle option -> non-optional fields are added to 'required'
     match tt with
     | Recognizers.Primitive t -> Primitive.toSchema t
     | Recognizers.Refinement t -> refinementToSchema t

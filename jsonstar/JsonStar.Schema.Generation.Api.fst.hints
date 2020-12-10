@@ -1,5 +1,5 @@
 [
-  "\u0007¯_µﬁ¶u2E¬˙†z¸\u001cï",
+  "◊ê≤\u0010\u0001kÉ¸à9MÂ≥Îöï",
   [
     [
       "JsonStar.Schema.Generation.Api.string_pat_s",
@@ -11,7 +11,7 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "9b624bec589b35d5898bfa433710f3c5"
+      "3475c7337c358724a573188fd3528686"
     ],
     [
       "JsonStar.Schema.Generation.Api.string_pat_s",
@@ -23,7 +23,49 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "f05d9a788b232fd2ef3d0d04cc6c7623"
+      "b9a92d79cd3055d93460ef634b3f6610"
+    ],
+    [
+      "JsonStar.Schema.Generation.Api.record_simple_refinements_typenames",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_JsonStar.Schema.Generation.Api.enum_onetwothree__uu___haseq",
+        "equation_JsonStar.Schema.Generation.Api.enum_onetwoonly",
+        "equation_JsonStar.Schema.Generation.Api.enum_onetwoonly_withoutone",
+        "equation_JsonStar.Schema.Generation.Api.min5max9",
+        "equation_JsonStar.Schema.Generation.Api.string_max5",
+        "equation_Prims.eqtype", "function_token_typing_Prims.int",
+        "function_token_typing_Prims.string",
+        "haseqTm_refine_36ca0985d50a02c870fea14a0f060b5c",
+        "haseqTm_refine_bd736453a0e25540469c51fc8a74c710",
+        "haseqTm_refine_c56df655edecd0c85903ec648229d20a",
+        "haseqTm_refine_feb21562c21510842fbf8cd28f382c46",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
+      ],
+      0,
+      "73f745361f93f57e6a6f234ff6fcf0f7"
+    ],
+    [
+      "JsonStar.Schema.Generation.Api.record_with_optional_field",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_FStar.Pervasives.Native.option__uu___haseq",
+        "equation_JsonStar.Schema.Generation.Api.min5max9",
+        "equation_JsonStar.Schema.Generation.Api.nat2",
+        "equation_Prims.eqtype", "function_token_typing_Prims.int",
+        "haseqTm_refine_32353411bafb29aef48ac4a2ae239b7c",
+        "haseqTm_refine_36ca0985d50a02c870fea14a0f060b5c",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "refinement_kinding_Tm_refine_36ca0985d50a02c870fea14a0f060b5c"
+      ],
+      0,
+      "08e86b0a69623b1b8e8dc802bdaf95b3"
     ]
   ]
 ]

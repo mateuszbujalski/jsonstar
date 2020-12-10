@@ -39,6 +39,8 @@ type enum_withoutthree = x:enum_onetwothree{ SchemaDsl.disallow x [ Two?; ]}
 let enum_onetwoonly_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`enum_onetwoonly))
 let enum_withoutthree_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`enum_withoutthree))
 
+type enum_onetwoonly_withoutone = x:enum_onetwoonly{ SchemaDsl.disallow x [ One?;] }
+
 type record_simple = 
     {
         field_string : string;
@@ -47,10 +49,17 @@ type record_simple =
 
 let record_simple_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`record_simple))
 
-// TODO: Support type names - perhaps it's only a matter of delta normalization of type terms in the record?
-//type record_simple_refinements_typenames = 
-//    {
-//        field_string_max5 : string_max5_dsl;
-//        field_int_min5max9 : min5max9;
-//        field_enum_enum_onetwoonly_withoutone : enum_onetwoonly_withoutone;
-//    }
+type record_simple_refinements_typenames = 
+    {
+        field_string_max5 : string_max5;
+        field_int_min5max9 : min5max9;
+        field_enum_enum_onetwoonly_withoutone : enum_onetwoonly_withoutone;
+    }
+let record_simple_refinements_typenames_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`record_simple_refinements_typenames))
+
+type record_with_optional_field = 
+    {
+        field_required : nat2;
+        field_optional : option min5max9;
+    }
+let record_with_optional_field_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`record_with_optional_field))

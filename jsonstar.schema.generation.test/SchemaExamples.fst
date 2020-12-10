@@ -90,6 +90,14 @@ let schema_record_simple =
     let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_simple))) in
     JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
 
-//let schema_record_simple_refinements =
-//    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_simple_refinements))) in
-//    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+let schema_record_simple_refinements =
+    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_simple_refinements))) in
+    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+
+let schema_record_simple_refinements_type_abbrev =
+    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_simple_refinements_type_abbrev))) in
+    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+   
+let schema_record_with_optional_field =
+    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_with_optional_field))) in
+    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)

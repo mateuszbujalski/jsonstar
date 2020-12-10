@@ -1,1 +1,58 @@
-[ "ûùº§‹\u0017á¢/≥\u001c7Ã\u0018Êz", [] ]
+[
+  "}vÒªY+⁄·º\u001d‹‘˙“¢À",
+  [
+    [
+      "Types.record_simple_refinements",
+      1,
+      2,
+      1,
+      [
+        "@query", "assumption_Types.enum_onetwothree__uu___haseq",
+        "equation_Types.enum_onetwoonly",
+        "haseqTm_refine_38553343054b5ae86959b47267604032"
+      ],
+      0,
+      "22379c5300d784637a7295d28093b9b4"
+    ],
+    [
+      "Types.record_simple_refinements_type_abbrev",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_Types.enum_onetwothree__uu___haseq",
+        "equation_Prims.eqtype", "equation_Types.enum_onetwoonly",
+        "equation_Types.enum_onetwoonly_withoutone",
+        "equation_Types.min5max9", "equation_Types.string_max5_dsl",
+        "function_token_typing_Prims.int",
+        "function_token_typing_Prims.string",
+        "haseqTm_refine_36ca0985d50a02c870fea14a0f060b5c",
+        "haseqTm_refine_38553343054b5ae86959b47267604032",
+        "haseqTm_refine_cf9b736b83ee5ca675a77e68fab0da8a",
+        "haseqTm_refine_feb21562c21510842fbf8cd28f382c46",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
+      ],
+      0,
+      "77b33f888adecc92f127bfc7f9292c51"
+    ],
+    [
+      "Types.record_with_optional_field",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "assumption_FStar.Pervasives.Native.option__uu___haseq",
+        "equation_Prims.eqtype", "equation_Types.min5max9",
+        "equation_Types.nat2", "function_token_typing_Prims.int",
+        "haseqTm_refine_32353411bafb29aef48ac4a2ae239b7c",
+        "haseqTm_refine_36ca0985d50a02c870fea14a0f060b5c",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "refinement_kinding_Tm_refine_36ca0985d50a02c870fea14a0f060b5c"
+      ],
+      0,
+      "e9ca704eab6396e8142054efb8cea40d"
+    ]
+  ]
+]

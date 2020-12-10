@@ -36,10 +36,22 @@ type record_simple =
         field_int : int;
     }
 
+type record_simple_refinements = 
+    {
+        field_string_max5 : s:string{JsonStar.Schema.Dsl.maxLength s 5};
+        field_int_min5max9 : x:int{x >= 5 && x <= 9};
+        field_enum_enum_onetwoonly_withoutone : x:enum_onetwoonly{ SchemaDsl.disallow x [ One?;] };
+    }
 
-//type record_simple_refinements = 
-//    {
-//        field_string_max5 : s:string{JsonStar.Schema.Dsl.maxLength s 5};
-//        field_int_min5max9 : x:int{x >= 5 && x <= 9};
-//        field_enum_enum_onetwoonly_withoutone : x:enum_onetwoonly{ SchemaDsl.disallow x [ One?;] };
-//    }
+type record_simple_refinements_type_abbrev = 
+    {
+        field_string_max5_ab : string_max5_dsl;
+        field_int_min5max9_ab : min5max9;
+        field_enum_enum_onetwoonly_withoutone_ab : enum_onetwoonly_withoutone;
+    }
+
+type record_with_optional_field = 
+    {
+        field_required : nat2;
+        field_optional : option min5max9;
+    }
