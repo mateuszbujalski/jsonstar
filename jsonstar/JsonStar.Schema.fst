@@ -72,6 +72,19 @@ let rec list_unref_pair #a #p l =
 //         | p :: pss -> if (fst p) = key then (propKey, propValue) :: 
 //     let props = Object?.props j in
 
+// FIXME: A dirty workaround for now
+let addToProperties (propKey : string) (propValue : json) (j : json{JObject? j}) : Tot (r:json{JObject? r}) = 
+    let rec aux (ps : list (string *json)) : Tot (list (string * json)) =
+        match ps with
+        | [] -> [ "properties", JObject [ propKey, propValue ] ]
+        | p :: pss -> 
+            if (fst p) = "properties" && JObject? (snd p)
+                then (fst p, addProp propKey propValue (snd p)) :: pss
+                else p :: aux pss // BUG: What if JObject? (snd p) isn't true
+    in
+    JObject (aux (JObject?.props j))
+                
+
 // TODO: Prove the termination and split the "toJson" into smaller pieces
 // let rec objectToJson (props:list (string * schema)) (deps: list (string * list (string * schema))) (options:object_options) : Tot (z:json{JObject? z}) = 
 //     let required = Option.mapTot (fun (v:list string) -> JArray (List.Tot.map JString v)) options.required in
@@ -157,14 +170,16 @@ let rec toJson (s : schema) : Tot (z:json{JObject? z}) (decreases (height s)) =
                                 dep_schema 
                                 (fun (value, ss) ->
                                     let ss_j : x:json{JObject? x} = toJson ss in
-                                    match ss_j with
-                                    // BUG: the "enum" field should go into "properties" property inside "props"
-                                    // TODO: Rewrite the code to get a guarantee that "props" contains "properties" property
-                                    //       - extract the code that handles Object schema type and make it return json with 
-                                    //         and extra refinement about "properties" 
-                                    //       - Add some extra refinements to "deps" in schema definition (as it should contain a schema of a record)
-                                    //         and make it work with tactics (might be hard as it's defined with mutually recursive types and using the other type in a refinement of the first one doesn't seem supported)
-                                    | JObject props -> JObject ((name, JObject [("enum", JArray [JString value])]) :: props)
+                                    let ss_j_ex : x:json = addToProperties name (JObject [("enum", JArray [JString value])]) ss_j in
+                                    ss_j_ex
+                                    //match ss_j with
+                                    //// BUG: the "enum" field should go into "properties" property inside "props"
+                                    //// TODO: Rewrite the code to get a guarantee that "props" contains "properties" property
+                                    ////       - extract the code that handles Object schema type and make it return json with 
+                                    ////         and extra refinement about "properties" 
+                                    ////       - Add some extra refinements to "deps" in schema definition (as it should contain a schema of a record)
+                                    ////         and make it work with tactics (might be hard as it's defined with mutually recursive types and using the other type in a refinement of the first one doesn't seem supported)
+                                    //| JObject props -> JObject ((name, JObject [("enum", JArray [JString value])]) :: props)
                                 )
                         in
                         name, JObject ["oneOf", JArray subs] 

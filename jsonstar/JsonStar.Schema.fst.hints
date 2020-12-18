@@ -1,5 +1,5 @@
 [
-  "@¶B\bV@Ød©Ωùf\u000fπ_£",
+  "‡£3\u0012≥µŒùäõ≠÷\u0014n$•",
   [
     [
       "JsonStar.Schema.string_options",
@@ -383,6 +383,29 @@
       "12ceab9b7560111dad795ff0470f0e38"
     ],
     [
+      "JsonStar.Schema.addToProperties",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "JsonStar.Json_pretyping_b45bfdceac87390c30533768b4cdf148",
+        "Prims_pretyping_3862c4e8ff39bfc3871b6a47e7ff5b2e",
+        "Prims_pretyping_ce036b6b736ef4e0bc3a9ff132a12aed",
+        "constructor_distinct_JsonStar.Json.JObject",
+        "data_elim_JsonStar.Json.JObject",
+        "disc_equation_JsonStar.Json.JObject", "disc_equation_Prims.Cons",
+        "disc_equation_Prims.Nil", "equality_tok_JsonStar.Json.JNull@tok",
+        "equality_tok_Prims.LexTop@tok", "fuel_guarded_inversion_Prims.list",
+        "primitive_Prims.op_AmpAmp", "projection_inverse_BoxBool_proj_0",
+        "projection_inverse_JsonStar.Json.JObject_props",
+        "refinement_interpretation_Tm_refine_21923b165d4b63a415001884ab164bc8",
+        "subterm_ordering_Prims.Cons", "typing_tok_JsonStar.Json.JNull@tok"
+      ],
+      0,
+      "0eae80587af7a25f5a2a4e42c857af0e"
+    ],
+    [
       "JsonStar.Schema.toJson",
       1,
       2,
@@ -425,7 +448,6 @@
         "projection_inverse_JsonStar.Schema.Object_props",
         "projection_inverse_JsonStar.Schema.OneOf_items",
         "projection_inverse_JsonStar.Schema.Reference_ref",
-        "refinement_interpretation_Tm_refine_21923b165d4b63a415001884ab164bc8",
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
         "refinement_interpretation_Tm_refine_596c3c0b12b7f5d8eb1545749ae2d0ae",
         "refinement_interpretation_Tm_refine_9aae9a4fe20ee126736377f5cc103c63",
@@ -442,7 +464,7 @@
         "typing_tok_JsonStar.Json.JString@tok"
       ],
       0,
-      "f2ed7885e6605549e3ff1428e01eae28"
+      "9d27ab6c8a34c40e548839e920d32d16"
     ]
   ]
 ]
