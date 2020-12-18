@@ -8,6 +8,11 @@ let rec try_satisfy_any (#a : Type) (fs : list (a -> bool)) (x : a) : Tot (optio
   | [] -> None
   | f :: ft -> if f x then Some x else try_satisfy_any #a ft x
 
+val satisfy_all: ('a -> T.Tac bool) -> list 'a -> T.Tac bool
+let rec satisfy_all f x = match x with
+  | [] -> true
+  | a::tl -> if f a then satisfy_all f tl else false
+
 let tfail (#a: Type) (s:string) : T.Tac a =
     T.debug ("Tactic failure: " ^ s);
     T.fail s

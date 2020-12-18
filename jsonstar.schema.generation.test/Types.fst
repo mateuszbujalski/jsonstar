@@ -55,3 +55,13 @@ type record_with_optional_field =
         field_required : nat2;
         field_optional : option min5max9;
     }
+
+type foo_one = { fielda : int; }
+type foo_two = { fieldb : string; }
+type foo_type =
+    | DepOne : v:foo_one -> foo_type
+    | DepTwo : v:foo_two -> foo_type
+type record_with_dep = 
+    {
+        foo_field : foo_type;
+    }

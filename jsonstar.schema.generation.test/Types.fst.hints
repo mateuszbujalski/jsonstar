@@ -1,5 +1,5 @@
 [
-  "}vñ»Y+Úá¼\u001dÜÔúÒ¢Ë",
+  "t˜®¹u+6>Û&Ê§b(\u0006:",
   [
     [
       "Types.record_simple_refinements",
@@ -12,7 +12,7 @@
         "haseqTm_refine_38553343054b5ae86959b47267604032"
       ],
       0,
-      "22379c5300d784637a7295d28093b9b4"
+      "ef7cef1e816e43eb4c0b231d05094749"
     ],
     [
       "Types.record_simple_refinements_type_abbrev",
@@ -34,7 +34,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "77b33f888adecc92f127bfc7f9292c51"
+      "3cf27ccfbdbac032d4d405ad76118a1b"
     ],
     [
       "Types.record_with_optional_field",
@@ -52,7 +52,52 @@
         "refinement_kinding_Tm_refine_36ca0985d50a02c870fea14a0f060b5c"
       ],
       0,
-      "e9ca704eab6396e8142054efb8cea40d"
+      "a3f0c31156a96372a766fe1ac1ee471a"
+    ],
+    [
+      "Types.foo_type",
+      1,
+      2,
+      1,
+      [
+        "@query", "assumption_Types.foo_one__uu___haseq",
+        "assumption_Types.foo_two__uu___haseq"
+      ],
+      0,
+      "030526050cac0caf1bfa1badf3b83ce1"
+    ],
+    [
+      "Types.__proj__DepOne__item__v",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_eb5864b50467122a4ef672cd2263678f"
+      ],
+      0,
+      "aee7010b05085014b0ad0e43a3eaf48a"
+    ],
+    [
+      "Types.__proj__DepTwo__item__v",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_19f3f41ad9e97ffbcef6287307fcb16a"
+      ],
+      0,
+      "370615c1c9587217829981279fa48147"
+    ],
+    [
+      "Types.record_with_dep",
+      1,
+      2,
+      1,
+      [ "@query", "assumption_Types.foo_type__uu___haseq" ],
+      0,
+      "98e1484129d08a425574363b7c3fabb1"
     ]
   ]
 ]

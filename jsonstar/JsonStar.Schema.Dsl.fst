@@ -35,10 +35,18 @@ let uniqueItems (#a:eqtype) (l : list a) = List.Tot.noRepeats l
 
 // enum options
 /// Restricts enum to only allow certain values from the list
-irreducible let rec allow (x : 'a) (l : list ('a -> bool)) = 
-    match l with
-    | [] -> false
-    | f :: fs -> if f x then true else allow x fs
+//let rec allow (#a : eqtype) (x : a) (l : list a) = 
+//    match l with
+//    | [] -> false
+//    | f :: fs -> if f = x then true else allow #a x fs
+
+//// This version doesn't work on a call site - looks like it's a bit too much for smt solver
+let rec allow (#a : Type) (x : a) (l : list (a -> Tot bool)) =
+    //: Tot (z:bool{(z = true) ==> (exists (f:a -> Tot bool). (f x = true /\ List.Tot.memP f l))}) = 
+   match l with
+   | [] -> false
+   | f :: fs -> if f x then true else allow x fs
+
 /// Restricts enum so that certain values are not allowed
 let rec disallow (x : 'a) (l : list ('a -> bool)) = 
     match l with

@@ -101,3 +101,7 @@ let schema_record_simple_refinements_type_abbrev =
 let schema_record_with_optional_field =
     let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_with_optional_field))) in
     JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+
+let schema_record_with_dep =
+    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`record_with_dep))) in
+    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)

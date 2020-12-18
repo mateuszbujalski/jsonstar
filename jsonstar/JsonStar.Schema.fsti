@@ -62,7 +62,8 @@ type schema_type =
     | Number : options:number_options -> schema_type
     // { type : boolean }
     | Boolean
-    | Object : props:list (string * schema) -> deps:list (string * schema) -> options:object_options -> schema_type
+    // deps is name of the enum field, and values which activate particular subschemas
+    | Object : props:list (string * schema) -> deps: list (string * list (string * schema (*x:schema{Object? (Mkschema?._type x)}*))) -> options:object_options -> schema_type
     // Just list validation, no support for tuples
     | Array : items:schema -> options:array_options -> schema_type
     | Reference : ref:string -> schema_type
@@ -80,15 +81,13 @@ and schema =
         _default : option string;
         // any named type will go into definitions, otherwise it should be inlined
         definitions : list (string * schema);
-        // TODO: Should this be part of common properties of the schema or rather part of Object?
-        //dependencies : list (string * schema);
     }
 
 // Creates schema object that represents a particular type with no extra details
 val mkSchemaEmpty : schema_type -> Tot schema
 
 /// Transform json-schema into json
-val toJson : schema -> Tot json
+val toJson : schema -> Tot (x:json{JObject? x})
 
 // To extract just this module use:
 // ..\external\fstar\tools\bin\fstar.exe --warn_error -271 --odir obj\Debug\extracted --codegen FSharp --use_hints --record_hints JsonStar.Schema.fst --extract "+JsonStar.Schema"

@@ -4,11 +4,14 @@ open FStar.String
 open JsonStar.Json
 open JsonStar.Utils
 
+let bool_to_string (b : bool) : Tot string =
+	if b then "true" else "false"
+
 // TODO: Pretty print
 let rec stringify (j : json) =
 	match j with
 	| JNull -> "null"
-	| JBoolean b -> "\"" ^ string_of_bool b ^ "\""
+	| JBoolean b -> "\"" ^ bool_to_string b ^ "\""
 	| JNumber n _ -> "\"" ^ n ^ "\""
 	| JString s -> "\"" ^ s ^ "\""
 	| JArray xs ->

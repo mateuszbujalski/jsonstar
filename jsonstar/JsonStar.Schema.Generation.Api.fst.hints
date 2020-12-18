@@ -1,5 +1,5 @@
 [
-  "◊ê≤\u0010\u0001kÉ¸à9MÂ≥Îöï",
+  "⁄Cxÿ9\u0017Ì1™#‰ÿ≤\u000f\u000e¨",
   [
     [
       "JsonStar.Schema.Generation.Api.string_pat_s",
@@ -11,7 +11,7 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "3475c7337c358724a573188fd3528686"
+      "c663258efed5622a0b2f23c5eced838f"
     ],
     [
       "JsonStar.Schema.Generation.Api.string_pat_s",
@@ -23,7 +23,7 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "b9a92d79cd3055d93460ef634b3f6610"
+      "a90bb9bdb1c2ace846ea212c2f027697"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_simple_refinements_typenames",
@@ -46,7 +46,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "73f745361f93f57e6a6f234ff6fcf0f7"
+      "b297c219f04bb1901b687d34f999a98c"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_with_optional_field",
@@ -65,7 +65,56 @@
         "refinement_kinding_Tm_refine_36ca0985d50a02c870fea14a0f060b5c"
       ],
       0,
-      "08e86b0a69623b1b8e8dc802bdaf95b3"
+      "d1b70b6aecb671850df12a8e636d6ba1"
+    ],
+    [
+      "JsonStar.Schema.Generation.Api.du_dep",
+      1,
+      2,
+      1,
+      [
+        "@query",
+        "assumption_JsonStar.Schema.Generation.Api.foo_one__uu___haseq",
+        "assumption_JsonStar.Schema.Generation.Api.foo_two__uu___haseq"
+      ],
+      0,
+      "e666f7fb90bdd243b9e122956ae296c0"
+    ],
+    [
+      "JsonStar.Schema.Generation.Api.__proj__DepOne__item__v",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_1d3d2af25b055b6a7600180ddd46067d"
+      ],
+      0,
+      "9010d909e83ac6be049f6d1888eee40a"
+    ],
+    [
+      "JsonStar.Schema.Generation.Api.__proj__DepTwo__item__v",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_6044bc40a8fa552ab96703f23ad9b44a"
+      ],
+      0,
+      "db9e29f39ff93e37af3adab2c2068bfe"
+    ],
+    [
+      "JsonStar.Schema.Generation.Api.record_with_dep",
+      1,
+      2,
+      1,
+      [
+        "@query",
+        "assumption_JsonStar.Schema.Generation.Api.du_dep__uu___haseq"
+      ],
+      0,
+      "d52023bd2e04899064ad2a5e17e42349"
     ]
   ]
 ]

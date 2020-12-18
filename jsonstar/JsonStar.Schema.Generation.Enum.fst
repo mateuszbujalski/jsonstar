@@ -24,6 +24,8 @@ let unpack_enum_constructor (t : T.term) : T.Tac (list string) =
     | T.Tv_FVar fv -> T.inspect_fv fv
     | _ -> T.fail ("Expected enum constructor name, got " ^ (T.term_to_string t))
 
+let mkenum (vs : list string) : T.Tac schema = mkSchemaEmpty (Enum vs)
+
 let toSchema (fv : T.fv) : T.Tac schema =
     let values = T.map (fun n -> L.last n) (get_enum_constructors fv) in
     {

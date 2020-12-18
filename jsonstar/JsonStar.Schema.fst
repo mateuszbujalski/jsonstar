@@ -3,6 +3,42 @@ module JsonStar.Schema
 open JsonStar.Utils
 open JsonStar.Json
 
+let rec max_list (xs : list int{FStar.List.Tot.length xs >= 1}) : Tot int =
+    match xs with
+    | [ x ] -> x
+    | x :: tl -> 
+        let max_tail = max_list tl in
+        if x > max_tail then x else max_tail
+
+let empty_list_to_option (xs : list 'a) : Tot (option (y:list 'a{FStar.List.Tot.length y >= 1})) =
+    match xs with
+    | [] -> None
+    | _ -> Some xs
+
+let option_default (def : 'a) (opt : option 'a) : Tot 'a = 
+    match opt with
+    | None -> def
+    | Some x -> x
+
+let rec height (s : schema) : Tot int (decreases (Mkschema?._type s))=
+    match s._type with
+    | String _ -> 1
+    | Enum _ -> 1
+    | Integer -> 1
+    | Number _ -> 1
+    | Boolean -> 1
+    | Reference _ -> 1
+    | Array items _ -> 1 + (height items)
+    | Object props deps _ -> 
+        let props_heights = list_map props (fun (_, ss) -> height ss) in
+        let deps_heights = list_map deps (fun (_, d) -> max_list (option_default [ 0 ] (empty_list_to_option (list_map d (fun (_, ss) -> height ss))))) in
+        let props_max = max_list (option_default [ 0 ] (empty_list_to_option props_heights)) in
+        let deps_max = max_list (option_default [ 0 ] (empty_list_to_option deps_heights)) in
+        1 + (if props_max >= deps_max then props_max else deps_max)
+    | OneOf items -> 
+        let items_heights = list_map items (fun ss -> height ss) in
+        1 + (max_list (option_default [ 0 ] (empty_list_to_option items_heights)))
+
 let string_of_number (x : number) = 
     match x with
     | Int i -> string_of_int i
@@ -23,8 +59,55 @@ let enrichWithCommon (s : schema) (j : json{JObject? j}) : Tot (z:json{JObject? 
     ||> addPropOpt "title" (Option.mapTot JString s.title)
     ||> addPropOpt "default" (Option.mapTot JString s._default)
 
+val list_unref_pair : #a:Type -> #p:(a -> Type0) -> list (string * x:a{p x}) -> Tot (list (string * a))
+let rec list_unref_pair #a #p l =
+    match l with
+    | [] -> []
+    | (s, x)::xs -> (s, x) :: list_unref_pair xs
+
+// let extendProp (key : string) (propKey :string) (propValue : json) (j:json{JObject? j) (JObject?.props j)}) : Tot (r:json{JObject? r}) =
+//     let rec aux (ps : list (string * json) : Tot (list (string * json)) =
+//         match ps with
+//         | [] -> (propKey, propValue)
+//         | p :: pss -> if (fst p) = key then (propKey, propValue) :: 
+//     let props = Object?.props j in
+
+// TODO: Prove the termination and split the "toJson" into smaller pieces
+// let rec objectToJson (props:list (string * schema)) (deps: list (string * list (string * schema))) (options:object_options) : Tot (z:json{JObject? z}) = 
+//     let required = Option.mapTot (fun (v:list string) -> JArray (List.Tot.map JString v)) options.required in
+//     let additionalProp = JBoolean (defaultWith false options.additionalProperties) in 
+//     let properties = list_map props (fun (name, prop_schema) -> name, (toJson prop_schema)) in
+//     let deps_j : list (string * list (string * x:json{JObject? x})) = list_map deps (fun (name, dep_schema) -> name, list_map dep_schema (fun (value, ss) -> value, toJson ss)) in
+//     let dependencies = 
+//         list_map
+//             deps
+//             (fun (name, dep_schema) -> 
+//                 let subs = 
+//                     list_map 
+//                         dep_schema 
+//                         (fun (value, ss) ->
+//                             let ss_j : x:json{JObject? x} = toJson ss in
+//                             match ss_j with
+//                             | JObject props -> JObject ((name, JObject [("enum", JArray [JString value])]) :: props)
+//                         )
+//                 in
+//                 name, JObject ["oneOf", JArray subs] 
+//             ) 
+//     in
+//     let dependencies_opt =
+//         if FStar.List.Tot.length dependencies = 0 then 
+//             None 
+//         else Some (JObject dependencies)
+//     in
+//     JObject [ "type", JString "object" ]
+//     ||> addPropOpt "dependencies" (dependencies_opt)
+//     ||> addPropOpt "required" required
+//     ||> addProp "additionalProperties" additionalProp
+//     ||> addProp "properties" (JObject (list_unref_pair properties))
+
+
 /// Converts json-schema representation into printable json
-let rec toJson (s : schema) : Tot (z:json{JObject? z}) = 
+let rec toJson (s : schema) : Tot (z:json{JObject? z}) (decreases (height s)) = 
     let j =
         match s._type with
         | String options -> begin 
@@ -64,12 +147,39 @@ let rec toJson (s : schema) : Tot (z:json{JObject? z}) =
             let required = Option.mapTot (fun (v:list string) -> JArray (List.Tot.map JString v)) options.required in
             let additionalProp = JBoolean (defaultWith false options.additionalProperties) in 
             let properties = list_map props (fun (name, prop_schema) -> name, (toJson prop_schema)) in
-            let dependencies = list_map deps (fun (name, dep_schema) -> name, (toJson dep_schema)) in
+            let deps_j : list (string * list (string * x:json{JObject? x})) = list_map deps (fun (name, dep_schema) -> name, list_map dep_schema (fun (value, ss) -> value, toJson ss)) in
+            let dependencies = 
+                list_map
+                    deps
+                    (fun (name, dep_schema) -> 
+                        let subs = 
+                            list_map 
+                                dep_schema 
+                                (fun (value, ss) ->
+                                    let ss_j : x:json{JObject? x} = toJson ss in
+                                    match ss_j with
+                                    // BUG: the "enum" field should go into "properties" property inside "props"
+                                    // TODO: Rewrite the code to get a guarantee that "props" contains "properties" property
+                                    //       - extract the code that handles Object schema type and make it return json with 
+                                    //         and extra refinement about "properties" 
+                                    //       - Add some extra refinements to "deps" in schema definition (as it should contain a schema of a record)
+                                    //         and make it work with tactics (might be hard as it's defined with mutually recursive types and using the other type in a refinement of the first one doesn't seem supported)
+                                    | JObject props -> JObject ((name, JObject [("enum", JArray [JString value])]) :: props)
+                                )
+                        in
+                        name, JObject ["oneOf", JArray subs] 
+                    ) 
+            in
+            let dependencies_opt =
+                if FStar.List.Tot.length dependencies = 0 then 
+                    None 
+                else Some (JObject dependencies)
+            in
             JObject [ "type", JString "object" ]
+            ||> addPropOpt "dependencies" (dependencies_opt)
             ||> addPropOpt "required" required
             ||> addProp "additionalProperties" additionalProp
-            ||> addProp "properties" (JObject properties)
-            ||> addProp "dependencies" (JObject dependencies)
+            ||> addProp "properties" (JObject (list_unref_pair properties))
             end
         | Array items options -> begin
             let minItems = Option.mapTot (fun (v:nat) -> JNumber (string_of_int v) JInt) options.minItems in
@@ -84,11 +194,11 @@ let rec toJson (s : schema) : Tot (z:json{JObject? z}) =
         | Reference ref -> JObject [ "$ref", JString ref ]
         | OneOf items -> JObject [ "oneOf", JArray (list_map items toJson)]
     in
-    let definitions = 
+    let definitions : option (list (string * x:json{JObject? x})) = 
         if FStar.List.Tot.length s.definitions = 0 then 
             None 
         else Some (list_map s.definitions (fun (name, def_schema) -> name, (toJson def_schema))) 
     in
     j
-    ||> addPropOpt "definitions" (Option.mapTot JObject definitions)
+    ||> addPropOpt "definitions" (Option.mapTot (fun d -> JObject (list_unref_pair d)) definitions)
     ||> enrichWithCommon s

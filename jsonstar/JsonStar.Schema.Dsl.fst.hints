@@ -1,5 +1,5 @@
 [
-  "2\u007f˘¡M—çÒ\"ÿ∆¸Llœ[",
+  "NÀ±‰›%jeq≈ô”\u0002WBT",
   [
     [
       "JsonStar.Schema.Dsl.allow",
@@ -7,14 +7,23 @@
       2,
       1,
       [
-        "@MaxIFuel_assumption", "@query",
-        "binder_x_4f4407cb8304ff8db5a01db035093bd1_3",
-        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
-        "equality_tok_Prims.LexTop@tok", "fuel_guarded_inversion_Prims.list",
-        "projection_inverse_BoxBool_proj_0", "subterm_ordering_Prims.Cons"
+        "@MaxFuel_assumption", "@MaxIFuel_assumption",
+        "@fuel_correspondence_FStar.List.Tot.Base.memP.fuel_instrumented",
+        "@fuel_irrelevance_FStar.List.Tot.Base.memP.fuel_instrumented",
+        "@query", "binder_x_4f4407cb8304ff8db5a01db035093bd1_3",
+        "constructor_distinct_Prims.Cons", "disc_equation_Prims.Cons",
+        "disc_equation_Prims.Nil", "eq2-interp",
+        "equality_tok_Prims.LexTop@tok",
+        "equation_with_fuel_FStar.List.Tot.Base.memP.fuel_instrumented",
+        "fuel_guarded_inversion_Prims.list",
+        "kinding_Tm_arrow_e4eab69ee26f37309e9615f5a07e5b22", "l_or-interp",
+        "projection_inverse_BoxBool_proj_0",
+        "projection_inverse_Prims.Cons_a",
+        "projection_inverse_Prims.Cons_hd",
+        "projection_inverse_Prims.Cons_tl", "subterm_ordering_Prims.Cons"
       ],
       0,
-      "850d49ed9ac13a7f8aecdb679cf04c4c"
+      "750512187e9ab7e2ce36b7cea3f38d03"
     ],
     [
       "JsonStar.Schema.Dsl.disallow",
@@ -29,7 +38,7 @@
         "projection_inverse_BoxBool_proj_0", "subterm_ordering_Prims.Cons"
       ],
       0,
-      "6feceef7846fff46be0db75eacb49f73"
+      "d4b6c219fdc09dd79c95ab7bc7c4e785"
     ]
   ]
 ]

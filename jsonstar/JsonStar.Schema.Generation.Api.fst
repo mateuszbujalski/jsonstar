@@ -63,3 +63,14 @@ type record_with_optional_field =
         field_optional : option min5max9;
     }
 let record_with_optional_field_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`record_with_optional_field))
+
+type foo_one = { fielda : int; }
+type foo_two = { fieldb : string; }
+type du_dep =
+    | DepOne : v:foo_one -> du_dep
+    | DepTwo : v:foo_two -> du_dep
+type record_with_dep = 
+    {
+        field_dep : du_dep;
+    }
+let record_with_dep_s : schema = T.synth_by_tactic (fun () -> SchemaGen.gen_schema T.Goal (`record_with_dep))

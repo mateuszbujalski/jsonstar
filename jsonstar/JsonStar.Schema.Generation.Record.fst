@@ -63,7 +63,7 @@ let rec unpack_fields (qname : list string) (ty : T.term) : T.Tac (list record_f
         end
     | _ -> T.fail "Expected an arrow type"
 
-// get_record_fields (T.top_env ()) (T.explode_qn (`%r))
+// get_record (T.top_env ()) (T.explode_qn (`%r))
 let get_record (env : T.env) (qname : list string) : T.Tac record = 
     match T.lookup_typ env qname with
     | Some s -> begin
