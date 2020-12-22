@@ -92,8 +92,8 @@ try
     # Copy *.* from z3-4.8.5-x64-win/bin into tools/bin
     Copy-Item -Path "$z3Path\bin\*.*" -Destination $nuget_dir_tools_bin -Force
     # Copy <FStar_repo_root>/fsharp.extraction.targets to targets and rename it to $nuget_name.targets
-    # NOTE: If you need to work with sdk projects change TaskFactory="RoslynCodeTaskFactory" and AssemblyFile="$(MSBuildToolsPath\Microsoft.Build.Tasks.Code.dll"
-    Copy-Item -Path "$FStarPath\fsharp.extraction.targets" -Destination "$nuget_dir_build\$nuget_name.targets" -Force
+    # TODO: Integrate the fsharp.extraction.targets that is compatible with both framework and sdk based projects into FStar codebase
+    Copy-Item -Path "$scriptDir\fsharp.extraction.targets" -Destination "$nuget_dir_build\$nuget_name.targets" -Force
     Copy-Item -Path "$scriptDir\$nuget_name.props" -Destination $nuget_dir_build -Force
     # copy nuspec file and set version
     Copy-Item -Path "$scriptDir\$nuget_name.nuspec" -Destination $outputDir -Force

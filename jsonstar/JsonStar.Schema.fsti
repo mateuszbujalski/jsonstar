@@ -63,7 +63,7 @@ type schema_type =
     // { type : boolean }
     | Boolean
     // deps is name of the enum field, and values which activate particular subschemas
-    | Object : props:list (string * schema) -> deps: list (string * list (string * schema (*x:schema{Object? (Mkschema?._type x)}*))) -> options:object_options -> schema_type
+    | Object : props:list (string * schema) -> deps: list (string * list (string * schema)) -> options:object_options -> schema_type
     // Just list validation, no support for tuples
     | Array : items:schema -> options:array_options -> schema_type
     | Reference : ref:string -> schema_type

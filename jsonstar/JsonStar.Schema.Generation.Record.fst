@@ -33,12 +33,8 @@ let unpack_field_type (t : T.term) : T.Tac field_type =
     | _ -> Required t
 
 let unpack_field (b : T.binder) : T.Tac record_field = 
-    let (bv, aqual) = T.inspect_binder b in
-    let attr_opt = 
-        match aqual with
-        | T.Q_Meta_attr t -> Some t
-        | _ -> None
-    in
+    let (bv, (_, attrs)) = T.inspect_binder b in
+    let attr_opt = match attrs with | [] -> None | _ -> Some (FStar.List.Tot.hd attrs) in
     let bvv = T.inspect_bv bv in
     // Need to make fields of bv_view 
     let open FStar.Tactics in

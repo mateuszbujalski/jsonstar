@@ -11,7 +11,7 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "c663258efed5622a0b2f23c5eced838f"
+      "69dd1d6c95fb42775bcb3c52513754c3"
     ],
     [
       "JsonStar.Schema.Generation.Api.string_pat_s",
@@ -23,7 +23,7 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "a90bb9bdb1c2ace846ea212c2f027697"
+      "6e7828e56eeedacea21008ac54a64067"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_simple_refinements_typenames",
@@ -46,7 +46,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "b297c219f04bb1901b687d34f999a98c"
+      "d2456fc1ecac837093d31b19d9477cae"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_with_optional_field",
@@ -65,7 +65,7 @@
         "refinement_kinding_Tm_refine_36ca0985d50a02c870fea14a0f060b5c"
       ],
       0,
-      "d1b70b6aecb671850df12a8e636d6ba1"
+      "d7f02f833d4e2102401fb6f0b5050b61"
     ],
     [
       "JsonStar.Schema.Generation.Api.du_dep",
@@ -78,7 +78,7 @@
         "assumption_JsonStar.Schema.Generation.Api.foo_two__uu___haseq"
       ],
       0,
-      "e666f7fb90bdd243b9e122956ae296c0"
+      "4dc6dd43f4889e3b6bf090fb3e931930"
     ],
     [
       "JsonStar.Schema.Generation.Api.__proj__DepOne__item__v",
@@ -90,7 +90,7 @@
         "refinement_interpretation_Tm_refine_1d3d2af25b055b6a7600180ddd46067d"
       ],
       0,
-      "9010d909e83ac6be049f6d1888eee40a"
+      "5c70b4573e4fdd68f1adddda0a52e1e8"
     ],
     [
       "JsonStar.Schema.Generation.Api.__proj__DepTwo__item__v",
@@ -102,7 +102,7 @@
         "refinement_interpretation_Tm_refine_6044bc40a8fa552ab96703f23ad9b44a"
       ],
       0,
-      "db9e29f39ff93e37af3adab2c2068bfe"
+      "f5bfac3c0bb963891c54728102daee0d"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_with_dep",
@@ -114,7 +114,7 @@
         "assumption_JsonStar.Schema.Generation.Api.du_dep__uu___haseq"
       ],
       0,
-      "d52023bd2e04899064ad2a5e17e42349"
+      "ba8f597874d444954ef3e2c3009ece2f"
     ]
   ]
 ]
