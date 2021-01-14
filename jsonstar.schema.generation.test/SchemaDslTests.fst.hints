@@ -1,5 +1,5 @@
 [
-  "EÙæ¢qL\u0010ø×µxÑm:qù",
+  "•Ÿ:š‡o%k<\\>€Æ¶!v",
   [
     [
       "SchemaDslTests.nat2_p_ex1",
@@ -13,7 +13,7 @@
         "projection_inverse_BoxInt_proj_0"
       ],
       0,
-      "c0fa70c22b7ae682e4ae42339fd99916"
+      "cabf2d4233a547d77479353165a11668"
     ],
     [
       "SchemaDslTests.minimum3_p_ex1",
@@ -26,7 +26,7 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "104207e9e79d88a389a18f78e0a89004"
+      "d6cb00c0e66a3abd69554faf8bf00f04"
     ],
     [
       "SchemaDslTests.maximum8_p_ex1",
@@ -39,7 +39,29 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "f7d4407d55e68524b40c429d34a756f0"
+      "89f040ab0074f15029a145f832e34b71"
+    ],
+    [
+      "SchemaDslTests.rec_with_restricted_enum",
+      1,
+      2,
+      1,
+      [
+        "@query", "assumption_SchemaDslTests.enum_example__uu___haseq",
+        "equation_JsonStar.Schema.Dsl.allowed",
+        "haseqTm_refine_e6b776c826f4362ce434c98b03b81b35"
+      ],
+      0,
+      "079fc525621aace5e14bc76252cb85e9"
+    ],
+    [
+      "SchemaDslTests.rec_with_restricted_enum_ex1",
+      1,
+      2,
+      1,
+      [ "@query" ],
+      0,
+      "0ce59c5eef99cfde16501e2f4e891b62"
     ]
   ]
 ]

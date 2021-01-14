@@ -1,5 +1,5 @@
 [
-  "NË±äÝ%jeqÅ™Ó\u0002WBT",
+  "[\u0001sb¥þý„ñ SNw\u000bö’",
   [
     [
       "JsonStar.Schema.Dsl.allow",
@@ -23,7 +23,7 @@
         "projection_inverse_Prims.Cons_tl", "subterm_ordering_Prims.Cons"
       ],
       0,
-      "750512187e9ab7e2ce36b7cea3f38d03"
+      "b55f8c764d27485dd4bf3173f889bf30"
     ],
     [
       "JsonStar.Schema.Dsl.disallow",
@@ -38,7 +38,7 @@
         "projection_inverse_BoxBool_proj_0", "subterm_ordering_Prims.Cons"
       ],
       0,
-      "d4b6c219fdc09dd79c95ab7bc7c4e785"
+      "afe3cb32dd6c278986388a753ecc6512"
     ]
   ]
 ]

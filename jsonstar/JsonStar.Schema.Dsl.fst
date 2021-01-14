@@ -33,25 +33,17 @@ let minItems (l : list 'a) (n : nat) = List.Tot.length l >= n
 let maxItems (l : list 'a) (n : nat) = List.Tot.length l <= n
 let uniqueItems (#a:eqtype) (l : list a) = List.Tot.noRepeats l
 
-// enum options
-/// Restricts enum to only allow certain values from the list
-//let rec allow (#a : eqtype) (x : a) (l : list a) = 
-//    match l with
-//    | [] -> false
-//    | f :: fs -> if f = x then true else allow #a x fs
-
-//// This version doesn't work on a call site - looks like it's a bit too much for smt solver
-let rec allow (#a : Type) (x : a) (l : list (a -> Tot bool)) =
-    //: Tot (z:bool{(z = true) ==> (exists (f:a -> Tot bool). (f x = true /\ List.Tot.memP f l))}) = 
-   match l with
-   | [] -> false
-   | f :: fs -> if f x then true else allow x fs
-
-/// Restricts enum so that certain values are not allowed
-let rec disallow (x : 'a) (l : list ('a -> bool)) = 
+let rec allow (x : 'a) (l : list ('a -> Tot bool)) =
     match l with
+    | [] -> false
+    | f :: fs -> f x || allow x fs
+let allowed (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (allow x l == true)}
+
+let rec disallow (x : 'a) (l : list ('a -> Tot bool)) = 
+    match l with 
     | [] -> true
-    | f :: fs -> if f x then false else disallow x fs
+    | f :: fs -> not (f x) && disallow x fs
+let disallowed (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (disallow x l == true)}
 
 // TODO: Decide how do we want to express "oneOf" and "dependencies"
 
