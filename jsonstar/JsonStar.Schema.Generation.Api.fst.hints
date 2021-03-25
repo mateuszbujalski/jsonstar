@@ -11,19 +11,7 @@
         "projection_inverse_BoxBool_proj_0"
       ],
       0,
-      "35ca276b250f8d75c06f96e946e96798"
-    ],
-    [
-      "JsonStar.Schema.Generation.Api.string_pat_s",
-      2,
-      2,
-      1,
-      [
-        "@query", "equation_JsonStar.Schema.isPattern",
-        "projection_inverse_BoxBool_proj_0"
-      ],
-      0,
-      "715ed869e23e2ec0d944eee1c66d1ec7"
+      "b6971ae666bc5b35b2e3ee244db49da9"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_simple_refinements_typenames",
@@ -46,7 +34,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "be7515f909e93a7ec2135ce2fb53913b"
+      "9c94d56f88fd9729315d6433c834a535"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_with_optional_field",
@@ -65,7 +53,7 @@
         "refinement_kinding_Tm_refine_36ca0985d50a02c870fea14a0f060b5c"
       ],
       0,
-      "8ee4af377054bf40b3e02d2072cc81cb"
+      "60e4bbf9478e2be99598763743d2a400"
     ],
     [
       "JsonStar.Schema.Generation.Api.du_dep",
@@ -78,7 +66,7 @@
         "assumption_JsonStar.Schema.Generation.Api.foo_two__uu___haseq"
       ],
       0,
-      "db977120b367941fa1e9cf5722259e64"
+      "3338be91534195a1823de10dbf996d87"
     ],
     [
       "JsonStar.Schema.Generation.Api.__proj__DepOne__item__v",
@@ -90,7 +78,7 @@
         "refinement_interpretation_Tm_refine_1d3d2af25b055b6a7600180ddd46067d"
       ],
       0,
-      "c808600e367c53acb6a9f844bc5690d0"
+      "59797c8b254a1a827126d1ce9da8c68e"
     ],
     [
       "JsonStar.Schema.Generation.Api.__proj__DepTwo__item__v",
@@ -102,7 +90,7 @@
         "refinement_interpretation_Tm_refine_6044bc40a8fa552ab96703f23ad9b44a"
       ],
       0,
-      "fd29f327478e951d671d97d4ca120cbf"
+      "2afb794c2ce67f47ecf3339643931dbe"
     ],
     [
       "JsonStar.Schema.Generation.Api.record_with_dep",
@@ -114,7 +102,7 @@
         "assumption_JsonStar.Schema.Generation.Api.du_dep__uu___haseq"
       ],
       0,
-      "7e38edcd739dfa332f45abf61cf86798"
+      "4707ab2665135ba4686be9299ef2eced"
     ]
   ]
 ]

@@ -22,6 +22,8 @@ type SchemaToJsonTests() =
                 description = FStar_Pervasives_Native.None;
                 title = FStar_Pervasives_Native.None;
                 _default = FStar_Pervasives_Native.None;
+                readonly = FStar_Pervasives_Native.None;
+                format = FStar_Pervasives_Native.None;
                 definitions = [];
                 //dependencies = [];
             }

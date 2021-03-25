@@ -13,6 +13,11 @@ let rec satisfy_all f x = match x with
   | [] -> true
   | a::tl -> if f a then satisfy_all f tl else false
 
+val satisfy_any: ('a -> T.Tac bool) -> list 'a -> T.Tac bool
+let rec satisfy_any f x = match x with
+  | [] -> false
+  | a::tl -> if f a then true else satisfy_any f tl
+
 let tfail (#a: Type) (s:string) : T.Tac a =
     T.debug ("Tactic failure: " ^ s);
     T.fail s

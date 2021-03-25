@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.props" Condition="Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.props')" />
+  <Import Project="..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.props" Condition="Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,7 @@
          other projects depend on their latest version. -->
     <UpToDateCheckInput Include="@(None)" />
     <Compile Include="AssemblyInfo.fs" />
+    <!-- <Compile Include="fs\FStar_Real.fs" Link="FStar_Real.fs" /> -->
     <Compile Include="JsonStar.Math.fst" />
     <Compile Include="JsonStar.Utils.fst" />
     <Compile Include="JsonStar.Json.fst" />
@@ -61,9 +62,11 @@
     <Compile Include="JsonStar.Parser.fsti" />
     <Compile Include="JsonStar.PrettyPrint.fst" />
     <Compile Include="JsonStar.PrettyPrint.fsti" />
+    <Compile Include="JsonStar.Schema.Ast.Types.fst" />
     <Compile Include="JsonStar.Schema.fst" />
     <Compile Include="JsonStar.Schema.fsti" />
     <Compile Include="JsonStar.Schema.Dsl.fst" />
+    <Compile Include="JsonStar.Schema.Ast.ToJsonSchema.fst" />
     <!-- These files use tactics and are only used during F* verification time. 
          We don't want to extract them (and their dependencies which include Reflection/Tactics module
          from ulib).
@@ -71,14 +74,8 @@
          during verification which are later extracted as part of JsonStar.Schema.Generation.Api.fst (or 
          wherever the call to `let s : schema = T.synth_by_tactic (fun () -> gen_schema T.Goal (`YOUR_TYPE))` 
          happens). -->
-    <None Include="JsonStar.Schema.Generation.Attributes.fst" />
-    <None Include="JsonStar.Schema.Generation.Recognizers.fst" />
     <None Include="JsonStar.Schema.Generation.Helpers.fst" />
-    <None Include="JsonStar.Schema.Generation.Dependencies.fst" />
-    <None Include="JsonStar.Schema.Generation.Record.fst" />
-    <None Include="JsonStar.Schema.Generation.Primitive.fst" />
-    <None Include="JsonStar.Schema.Generation.Enum.fst" />
-    <None Include="JsonStar.Schema.Generation.Refinement.fst" />
+    <None Include="JsonStar.Schema.Generation.Reader.fst" />
     <None Include="JsonStar.Schema.Generation.fst" />
     <Compile Include="JsonStar.Schema.Generation.Api.fst" />
     <Content Include="packages.config" />
@@ -99,17 +96,17 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ulibfs">
-      <HintPath>..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\lib\net45\ulibfs.dll</HintPath>
+      <HintPath>..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\lib\net45\ulibfs.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.props'))" />
-    <Error Condition="!Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.targets'))" />
+    <Error Condition="!Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.props'))" />
+    <Error Condition="!Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.targets'))" />
   </Target>
-  <Import Project="..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.targets" Condition="Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.2.0\build\FStar.Windows.Ocaml.Unofficial.targets')" />
+  <Import Project="..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.targets" Condition="Exists('..\packages\FStar.Windows.Ocaml.Unofficial.0.4.0\build\FStar.Windows.Ocaml.Unofficial.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

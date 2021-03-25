@@ -1,5 +1,5 @@
 [
-  "˛\u001c|zTçô®¡iˆœE¿kŒ",
+  "X\u0002ÚC>\u0006H`¡€‡m‘Ûv§",
   [
     [
       "JsonStar.Math.max_nat",
@@ -13,7 +13,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "d7620cfcf5a75d9d1badc2dae0521fe9"
+      "c28a7417ccf515b8117066c942a1d578"
     ],
     [
       "JsonStar.Math.max_nat",
@@ -30,7 +30,7 @@
         "refinement_interpretation_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "95ad977dbf41663166e9be78d88d1e93"
+      "9ad5d8e2eae24f14963c634e9c8f64a6"
     ],
     [
       "JsonStar.Math.min_nat",
@@ -44,7 +44,7 @@
         "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
       ],
       0,
-      "bcf011eff430a2080c35820edbbd9ccf"
+      "7ff7e8f5e8de2e2e57dd77c72a431ccb"
     ],
     [
       "JsonStar.Math.min_nat",
@@ -61,7 +61,7 @@
         "refinement_interpretation_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "23a3659416f3edd273e86b1103bba820"
+      "8176af51f6eafee36cca1e80f39c3a7e"
     ]
   ]
 ]

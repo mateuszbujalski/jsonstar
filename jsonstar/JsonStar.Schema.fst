@@ -44,7 +44,7 @@ let string_of_number (x : number) =
     | Int i -> string_of_int i
 
 let mkSchemaEmpty (typ : schema_type) : Tot schema = 
-    Mkschema None None typ None None None []
+    Mkschema None None typ None None None None None []
 
 let defaultWith (def : 'a) (v : option 'a) = 
     match v with
