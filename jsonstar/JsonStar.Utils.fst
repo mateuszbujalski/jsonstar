@@ -14,3 +14,12 @@ let rec list_map xs f =
 	match xs with 
 	| [] -> []
 	| x :: xs' -> f x :: list_map xs' f
+
+val list_choose : (xs : list 'a) -> (f : (x : 'a{x<<xs} -> option 'b)) -> Tot (list 'b)
+let rec list_choose xs f = 
+	match xs with
+	| [] -> []
+	| x :: xs' -> 
+		match f x with 
+		| Some a -> a :: list_choose xs' f
+		| None   -> list_choose xs' f

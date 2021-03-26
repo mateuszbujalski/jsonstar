@@ -79,6 +79,8 @@ and schema =
         description : option string;
         title : option string;
         _default : option string;
+        readonly : option bool;
+        format : option string;
         // any named type will go into definitions, otherwise it should be inlined
         definitions : list (string * schema);
     }

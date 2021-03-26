@@ -37,12 +37,16 @@ let rec allow (x : 'a) (l : list ('a -> Tot bool)) =
     match l with
     | [] -> false
     | f :: fs -> f x || allow x fs
+
+unfold
 let allowed (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (allow x l == true)}
 
 let rec disallow (x : 'a) (l : list ('a -> Tot bool)) = 
     match l with 
     | [] -> true
     | f :: fs -> not (f x) && disallow x fs
+
+unfold
 let disallowed (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (disallow x l == true)}
 
 // TODO: Decide how do we want to express "oneOf" and "dependencies"

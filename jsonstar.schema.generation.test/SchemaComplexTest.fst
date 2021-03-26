@@ -52,6 +52,8 @@ let ex2 : dep_example =
 			negative_field = -3;
 		})
 
+// TODO: Add a test for allowed / disallowed with DUs instead of enums
+
 // TODO: Fix schema generation for "allowed / disallowed"
 //let schema_complex_dep_example =
 //    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`dep_example))) in
