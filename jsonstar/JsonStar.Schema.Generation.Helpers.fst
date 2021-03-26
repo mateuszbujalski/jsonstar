@@ -40,6 +40,10 @@ let drop_synonym (e : T.env) (t : T.term) : T.Tac (T.term) =
     // delta normalization unfolds names
     T.norm_term_env e [delta] t
 
+// NOTE: use with care, extensive use can be very slow and eats a lot of RAM
+let delta_name (e : T.env) (qname : list string) (t : T.term) : T.Tac T.term = 
+  T.norm_term_env e [delta_only qname] t
+
 let printAst (t : T.term) : T.Tac unit =
     let ast = FStar.Tactics.Print.term_to_ast_string t in
     T.print ast

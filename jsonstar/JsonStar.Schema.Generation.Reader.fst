@@ -502,7 +502,6 @@ and oneOfFromTerm (env : T.env) (t : T.term) : T.Tac AST.one_of =
     | _ -> T.fail (P.sprintf "Error in get_dependency. Expected a type name, got %s" (T.term_to_string t))
 
 and fromTerm (env : T.env) (t : T.term) : T.Tac AST.typ = 
-    // TODO: Delta norm just the top-level name?
     let t = Helpers.drop_synonym env t in
     let tv : T.term_view = T.inspect t in
     match tv with 
