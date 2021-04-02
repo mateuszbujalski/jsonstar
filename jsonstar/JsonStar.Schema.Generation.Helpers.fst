@@ -3,10 +3,12 @@ module JsonStar.Schema.Generation.Helpers
 module T = FStar.Tactics
 module L = FStar.List.Tot
 
+#push-options "--warn_error -290"
 let rec try_satisfy_any (#a : Type) (fs : list (a -> bool)) (x : a) : Tot (option a) =
   match fs with
   | [] -> None
   | f :: ft -> if f x then Some x else try_satisfy_any #a ft x
+#pop-options
 
 val satisfy_all: ('a -> T.Tac bool) -> list 'a -> T.Tac bool
 let rec satisfy_all f x = match x with

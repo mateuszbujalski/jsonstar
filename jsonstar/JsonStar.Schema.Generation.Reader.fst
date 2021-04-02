@@ -7,6 +7,10 @@ module L = FStar.List.Tot
 module AST = JsonStar.Schema.Ast.Types
 module T = FStar.Tactics
 module P = FStar.Printf
+module F = JsonStar.Schema.Generation.Formula
+module F_Dsl = JsonStar.Schema.Generation.Formula.Dsl
+
+open JsonStar.Schema.Generation.Types
 
 // TODO: 
 // 1. Complete the below to the point where it's on-par with existing code
@@ -16,16 +20,6 @@ module P = FStar.Printf
 // 5. Add tests for transforming terms into AST
 // 6. Add schema generation support for dependencies, arrays etc
 // 7. Fill in missing stuff needed to generate schema for types we need.
-
-/// Qualified name
-type qualified_name = l:list string{Cons? l}
-val to_qualified_name: n:list string{Cons? n} -> Tot qualified_name
-let to_qualified_name n = n
-
-let lastT (n : list string) : T.Tac string = 
-    match n with
-    | [] -> T.fail "Can't get last element of an empty list"
-    | ns -> L.last ns
 
 /// Helpers
 // Adds "Mk" to last segment of the qualified name
@@ -49,6 +43,7 @@ let dropTopLevelEqTrue (t : T.term) : T.Tac T.term =
 // where ref is the implementation of our DSL function, and ref_val is the argument we are refining.
 // We want to retain "App ref ref_val" and use it for comparisons as it's the biggest unchanging part 
 // within the Tv_Refine we're getting as input. 
+#push-options "--warn_error -242"
 let dropExtraArgs (t : T.term) : T.Tac T.term =
     let rec dropArgsAux (t : T.term) (n : nat) : T.Tac T.term = 
         match T.inspect t with
@@ -57,6 +52,7 @@ let dropExtraArgs (t : T.term) : T.Tac T.term =
         | _ -> T.fail ("Expected either Abs or App. Got " ^ (T.term_to_string t))
     in
     dropArgsAux t 0
+#pop-options
 
 // For DSL functions we need to first expand their name and then drop extra arguments as we only need to recognize 
 // that a certain function was used in the refinement.
@@ -184,7 +180,6 @@ let stringRefinementFromTerm (env : T.env) (ref : T.term) : T.Tac AST.string_ref
         end
     | _ -> T.fail (P.sprintf "%s expected to be of form Tv_App op value where op describes refinement and value is the value that should be used." (T.term_to_string ref))
 
-
 let enumRefinementFromTerm (env : T.env) (t : T.term) : T.Tac AST.enum_refinement = 
     let t = dropTopLevelEqTrue t in
     // Check if this is a complex refinement
@@ -240,6 +235,18 @@ let enumRefinementFromTerm (env : T.env) (t : T.term) : T.Tac AST.enum_refinemen
                 | _ -> T.fail (P.sprintf "Expected Tv_App. Got: %s" (T.term_to_string op_dsl))
                 end
             | _ -> T.fail (P.sprintf "Expected operator with argument. Got %s" (T.term_to_string op_with_arg))
+            end
+        | T.Tv_Refine b phi -> begin
+            let f = F.fromTerm env phi in
+            match f with
+            | F.Comp (F.BoolEq _) f1 (F.True_) -> begin
+                let f_dsl = F_Dsl.fromFormula f1 in
+                match f_dsl with
+                | F_Dsl.EnumRequired vs -> AST.Allow (T.map (fun (n, _) -> L.last n) vs)
+                | F_Dsl.EnumForbidden vs -> AST.Disallow (T.map (fun (n, _) -> L.last n) vs)
+                | F_Dsl.NotSupported _ -> T.fail (P.sprintf "Not recognized enum refinement: %s" (F.refinement_formula_to_string f))            
+                end
+            | _ -> T.fail (P.sprintf "Expected top-level 'formula = true' in an enum refinement, got: %s" (F.refinement_formula_to_string f))
             end
         | _ -> T.fail (P.sprintf "%s expected to be of form Tv_App op value where op describes refinement and value is the value that should be used." (T.term_to_string t))
         end

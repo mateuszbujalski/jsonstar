@@ -64,9 +64,15 @@ type primitive =
     | String : primitive
     | Boolean : primitive
 
+type enum = 
+    {
+        enum_values : list string;
+        enum_attributes : value_attributes;
+    }
+
 /// A single case discriminated union with a single field where the type name is equal to the case name
 /// NOTE: A common workaround to assign some metadata (via attributes) to a type abbreviation
-and typedef = 
+type typedef = 
     {
         _base : typ;
         _attributes : value_attributes;
@@ -76,12 +82,6 @@ and refinement =
     {
         _base : typ;
         _refinement : refinement_type;
-    }
-
-and enum = 
-    {
-        enum_values : list string;
-        enum_attributes : value_attributes;
     }
 
 and array_type = 

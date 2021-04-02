@@ -75,6 +75,8 @@
          wherever the call to `let s : schema = T.synth_by_tactic (fun () -> gen_schema T.Goal (`YOUR_TYPE))` 
          happens). -->
     <None Include="JsonStar.Schema.Generation.Helpers.fst" />
+    <None Include="JsonStar.Schema.Generation.Formula.fst" />
+    <None Include="JsonStar.Schema.Generation.Formula.Dsl.fst" />
     <None Include="JsonStar.Schema.Generation.Reader.fst" />
     <None Include="JsonStar.Schema.Generation.fst" />
     <Compile Include="JsonStar.Schema.Generation.Api.fst" />
