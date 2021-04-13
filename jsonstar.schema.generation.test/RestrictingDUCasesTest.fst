@@ -74,21 +74,21 @@ type record_with_du_dependency =
 	}
 
 // TODO: Add support for restricting DUs
-//type restricted_record_with_du_dependency = required #record_with_du_dependency (fun x -> x.dep_field) [ Option2?; ]
+type restricted_record_with_du_dependency = required #record_with_du_dependency (fun x -> x.dep_field) [ Option2?; ]
 
 // TODO: Add some examples
-//let ex1 : dep_example = Standard
-//let ex2 : dep_example = 
-//	Custom 
-//		({
-//			foo_field = FooTwo;
-//			yes_no_option_field = None;
-//			bar_field = BarThree;
-//			non_negative_field = 5;
-//			negative_field = -3;
-//		})
+let ex1 : dep_example = Standard
+let ex2 : dep_example = 
+	Custom 
+		({
+			foo_field = FooTwo;
+			yes_no_option_field = None;
+			bar_field = BarThree;
+			non_negative_field = 5;
+			negative_field = -3;
+		})
 
 
-//let schema_complex_dep_example =
-//    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`restricted_record_with_du_dependency))) in
-//    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+let schema_complex_dep_example =
+    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`restricted_record_with_du_dependency))) in
+    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)

@@ -20,8 +20,8 @@ let option_map (f : 'a -> 'b) (x : option 'a) : Tot (option 'b) =
     | None -> None
 
 type dsl_formula = 
-    | EnumRequired : list (qualified_name * T.term) -> dsl_formula
-    | EnumForbidden : list (qualified_name * T.term) -> dsl_formula
+    | EnumRequired : list (qualified_name * F.target) -> dsl_formula
+    | EnumForbidden : list (qualified_name * F.target) -> dsl_formula
     | NotSupported : F.refinement_formula -> dsl_formula
 
 #push-options "--warn_error -242"

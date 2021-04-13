@@ -36,6 +36,11 @@ let dropTopLevelEqTrue (t : T.term) : T.Tac T.term =
     | T.Comp (T.Eq _) l _ -> l
     | _ -> t
 
+let typ_to_string (x : T.typ) : T.Tac qualified_name = 
+    match T.inspect x with
+    | T.Tv_FVar fv -> T.inspect_fv fv
+    | _ -> T.fail "Can't extract typename from typ"
+
 // A helper functions for dropping arguments from DSL functions except the one which represents the
 // restricted value (assumed to always be the first argument in DSL function).
 // `dsl_fun should result in something like:
@@ -435,13 +440,48 @@ and recordFromTerm (env : T.env) (t : T.term) : T.Tac AST.record =
         end
     | _ -> T.fail (P.sprintf "Expected record, got %s" (T.term_to_string t))
     
+and recordRefinementFromTerm (env : T.env) (baseType : AST.record) (phi : T.term) : T.Tac (option AST.refinement_type) =
+    match T.inspect phi with
+    | T.Tv_Refine b phi -> begin
+        let f = F.fromTerm env phi in
+        match f with
+        | F.Comp (F.BoolEq _) f1 (F.True_) -> begin
+            T.print (F.refinement_formula_to_string f1);
+            let f_dsl = F_Dsl.fromFormula f1 in
+            // NOTE: we only allow a single target currently with DSL. And apart from the single
+            //       special case where it can be set by the user, it's always implicitly 'Id', i.e. 
+            //       current baseType
+            let getTarget (df : list (qualified_name * F.target)) : Tot F.target =
+                match df with
+                | (_, _target) :: _ -> _target
+                | _ -> F.Id
+            in
+            let bv_to_name (bv : T.bv) : T.Tac string = T.Mkbv_view?.bv_ppname (T.inspect_bv bv) in
+            let bv_to_typname (bv : T.bv) : T.Tac string = lastT (typ_to_string (T.Mkbv_view?.bv_sort (T.inspect_bv bv))) in
+            let rec getPath (target : F.target) : T.Tac (list AST.path_segment) =
+                match target with
+                | F.Id -> []
+                | F.Field t1 bv -> (getPath t1) @ [ AST.RecordField (bv_to_name bv) (bv_to_typname bv) ]
+                | F.Project t1 fv _ -> (getPath t1) @ [ AST.Variant (lastT (T.inspect_fv fv)) ]
+            in
+            match f_dsl with
+            | F_Dsl.EnumRequired vs -> let p = getPath (getTarget vs) in (*T.print (AST.path_to_string p);*) Some (AST.RecordRefinement (AST.EnumField p (AST.Allow (T.map (fun (n, _) -> L.last n) vs))))
+            | F_Dsl.EnumForbidden vs -> let p = getPath (getTarget vs) in (*T.print (AST.path_to_string p);*) Some (AST.RecordRefinement (AST.EnumField p (AST.Disallow (T.map (fun (n, _) -> L.last n) vs))))
+            | F_Dsl.NotSupported _ -> T.fail (P.sprintf "Not recognized record refinement: %s" (F.refinement_formula_to_string f))            
+            end
+        | _ -> T.fail (P.sprintf "Expected top-level 'formula = true' in an enum refinement, got: %s" (F.refinement_formula_to_string f))
+        end
+    | _ -> T.fail (P.sprintf "%s expected to be of form Tv_Refine b phi where phi describes refinement." (T.term_to_string phi))
+
 and refinementTypeFromTerm (env : T.env) (baseType : AST.typ) (phi : T.term) : T.Tac (option AST.refinement_type) = 
     match baseType with
     | AST.Primitive AST.String -> Some (complexRefinementFromTerm env (fun env phi -> AST.StringRefinement (stringRefinementFromTerm env phi)) phi)
     | AST.Primitive AST.Int    -> Some (complexRefinementFromTerm env (fun env phi -> AST.NumberRefinement (numberRefinementFromTerm env phi)) phi)
     | AST.Enum _               -> Some (complexRefinementFromTerm env (fun env phi -> AST.EnumRefinement (enumRefinementFromTerm env phi)) phi)
     | AST.TypeDef td           -> refinementTypeFromTerm env (AST.Mktypedef?._base td) phi
+    // TODO: Merge refinements from r and phi?
     | AST.Refinement r         -> refinementTypeFromTerm env (AST.Mkrefinement?._base r) phi
+    | AST.Record r             -> recordRefinementFromTerm env r phi
     // TODO: We don't support refinements for all types yet
     | _                        -> None
 
@@ -451,6 +491,7 @@ and refinementFromTerm (env : T.env) (t : T.term) : T.Tac AST.refinement =
         let b = T.inspect_bv b in
         let baseTerm : T.term = let open FStar.Tactics in b.bv_sort in
         let baseTyp = fromTerm env baseTerm in
+        //T.print (P.sprintf "Refinement: %s" (T.term_to_string phi));
         let refinedTyp = refinementTypeFromTerm env baseTyp phi in
         match refinedTyp with
         | Some r -> { AST._base = baseTyp; AST._refinement = r; }
