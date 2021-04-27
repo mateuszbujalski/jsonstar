@@ -37,7 +37,7 @@ type enum_example =
 
 type rec_with_restricted_enum = 
 	{
-		enum_field : JsonStar.Schema.Dsl.allowed #enum_example [ Case1?; Case2?; ];
+		enum_field : JsonStar.Schema.Dsl.enum_required #enum_example [ Case1?; Case2?; ];
 	}
 
 let rec_with_restricted_enum_ex1 = { enum_field = Case1 }

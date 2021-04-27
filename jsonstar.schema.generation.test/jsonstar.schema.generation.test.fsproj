@@ -53,6 +53,7 @@
     <Compile Include="Types.fst" />
     <Compile Include="SchemaExamples.fst" />
     <Compile Include="SchemaComplexTest.fst" />
+	<Compile Include="RestrictingDUCasesTest.fst" />
     <Compile Include="SchemaDslTests.fst" />
     <Compile Include="SchemaGenerationTests.fs" />
     <Content Include="app.config" />

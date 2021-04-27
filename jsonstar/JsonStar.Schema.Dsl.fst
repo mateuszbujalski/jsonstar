@@ -6,7 +6,8 @@ which can later be translated into json-schema.
 
 NOTE: Functions marked as irreducible can't be replaced with it's implementation for schema generation. 
       We only support detecting the DSL version of the functions below. 
-TODO: Does this break automatic F* proves similarly to hiding the implementation behind the interface?
+      This does break automatic F* proofs similarly to hiding the implementation behind the interface, so
+      consider anything marked as 'irreducible' as not fully supported.
 *)
 
 (*
@@ -33,13 +34,11 @@ let minItems (l : list 'a) (n : nat) = List.Tot.length l >= n
 let maxItems (l : list 'a) (n : nat) = List.Tot.length l <= n
 let uniqueItems (#a:eqtype) (l : list a) = List.Tot.noRepeats l
 
+// Restrictions on enums / DUs
 let rec allow (x : 'a) (l : list ('a -> Tot bool)) =
     match l with
     | [] -> false
     | f :: fs -> f x || allow x fs
-
-unfold
-let allowed (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (allow x l == true)}
 
 let rec disallow (x : 'a) (l : list ('a -> Tot bool)) = 
     match l with 
@@ -47,9 +46,25 @@ let rec disallow (x : 'a) (l : list ('a -> Tot bool)) =
     | f :: fs -> not (f x) && disallow x fs
 
 unfold
-let disallowed (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (disallow x l == true)}
+let enum_required (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (allow x l == true)}
 
-// TODO: Decide how do we want to express "oneOf" and "dependencies"
+unfold
+let enum_forbidden (#t:Type) (l:list (t -> bool)) = x:t{norm [primops; zeta; iota; delta] (disallow x l == true)}
+
+// TODO: Add tests for schema generation of types that use the below 
+unfold
+let required (#t:Type) (#ft:Type) (getter : t -> ft) (l : list (ft -> bool)) = 
+    x:t{norm [primops; zeta; iota; delta] (allow (getter x) l == true)}
+
+unfold
+let forbidden (#t:Type) (#ft:Type) (getter : t -> ft) (l : list (ft -> bool)) = 
+    x:t{norm [primops; zeta; iota; delta] (disallow (getter x) l == true)}
+
+unfold
+let allowed (#t:Type) (#ft:Type) (getter : t -> option ft) (l : list (ft -> bool)) = 
+    x:t{norm [primops; zeta; iota; delta] (Some? (getter x) ==> allow (Some?.v (getter x)) l)}
+
+let value (#t:eqtype) (expected:t) (provided : t) = (expected = provided)
 
 
 

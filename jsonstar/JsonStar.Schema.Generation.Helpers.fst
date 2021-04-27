@@ -3,10 +3,12 @@ module JsonStar.Schema.Generation.Helpers
 module T = FStar.Tactics
 module L = FStar.List.Tot
 
+#push-options "--warn_error -290"
 let rec try_satisfy_any (#a : Type) (fs : list (a -> bool)) (x : a) : Tot (option a) =
   match fs with
   | [] -> None
   | f :: ft -> if f x then Some x else try_satisfy_any #a ft x
+#pop-options
 
 val satisfy_all: ('a -> T.Tac bool) -> list 'a -> T.Tac bool
 let rec satisfy_all f x = match x with
@@ -39,6 +41,10 @@ let app_head_tail (t : T.term) : T.Tac (T.term * list T.argv) =
 let drop_synonym (e : T.env) (t : T.term) : T.Tac (T.term) =
     // delta normalization unfolds names
     T.norm_term_env e [delta] t
+
+// NOTE: use with care, extensive use can be very slow and eats a lot of RAM
+let delta_name (e : T.env) (qname : list string) (t : T.term) : T.Tac T.term = 
+  T.norm_term_env e [delta_only qname] t
 
 let printAst (t : T.term) : T.Tac unit =
     let ast = FStar.Tactics.Print.term_to_ast_string t in

@@ -23,25 +23,20 @@ type bar_enum =
 	| BarThree
 	| BarFour
 
-type standard_record = 
-	{
-		dum : string;
-	}
-
 type custom_record = 
 	{
-		foo_field : allowed #foo_enum [ FooTwo?; FooFour?; ]; 
+		foo_field : enum_required #foo_enum [ FooTwo?; FooFour?; ]; 
 		yes_no_option_field : option yes_no;
-		bar_field : disallowed #bar_enum [ BarOne?; BarFour?; ];
+		bar_field : enum_forbidden #bar_enum [ BarOne?; BarFour?; ];
 		non_negative_field : non_negative;
 		negative_field : negative;
 	}
 
 type dep_example = 
-	| Standard : v:standard_record -> dep_example // TODO: Drop standard_record here
+	| Standard : dep_example
 	| Custom : v:custom_record -> dep_example
 
-let ex1 : dep_example = Standard ({ dum = "aaaa"; })
+let ex1 : dep_example = Standard
 let ex2 : dep_example = 
 	Custom 
 		({
@@ -52,9 +47,12 @@ let ex2 : dep_example =
 			negative_field = -3;
 		})
 
-// TODO: Add a test for allowed / disallowed with DUs instead of enums
+type dep_example_top_level_record = 
+	{
+		top_a : string;
+		dep_field : dep_example;
+	}
 
-// TODO: Fix schema generation for "allowed / disallowed"
-//let schema_complex_dep_example =
-//    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`dep_example))) in
-//    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
+let schema_complex_dep_example =
+    let s : JsonStar.Schema.schema = (FStar.Tactics.synth_by_tactic (fun () -> JsonStar.Schema.Generation.gen_schema FStar.Tactics.Goal (`dep_example_top_level_record))) in
+    JsonStar.PrettyPrint.stringify (JsonStar.Schema.toJson s)
