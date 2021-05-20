@@ -21,3 +21,5 @@ let parse (content : string) : json =
     content
     |> parseJson
     |> convert
+
+let int_of_string (s : string) = System.Numerics.BigInteger.Parse s

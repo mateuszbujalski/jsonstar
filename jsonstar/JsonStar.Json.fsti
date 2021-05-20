@@ -14,3 +14,4 @@ type json =
 
 val addProp : (key:string) -> (v:json) -> (j:json{JObject? j}) -> Tot (r:json{JObject? r})
 val addPropOpt : (key:string) -> (v:option json) -> (j:json{JObject? j}) -> Tot (r:json{JObject? r})
+val getProp : (key:string) -> (j:json{JObject? j}) -> Tot (option json)
