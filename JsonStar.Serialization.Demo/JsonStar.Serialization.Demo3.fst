@@ -139,7 +139,7 @@ let deserialize_impl (t : Type) (typ_term : term) : Tac unit =
                 end
             else fail "We only support deserialization of a record, sorry!"
         end
-    | _ -> fail "Invalid usage of deserialize_impl_dyn. It should be used to generate a function: 'json -> result t'"
+    | _ -> fail "Invalid usage of deserialize_impl. It should be used to generate a function: 'json -> result t'"
 
 
 class serializable a = {
@@ -151,7 +151,7 @@ class serializable a = {
 let deserialize #a {| serializable a |} v = deserialize_gen #a v
 
 /// Example record type that we would want to deserialize //
-type r =                                                  //
+type sample_record_1 =                                    //
     {                                                     //
         l : x:int{x >= 5};                                //
     }                                                     //
@@ -164,9 +164,8 @@ type r =                                                  //
 // NOTE2: 
 //     Unfortunately we can't simply pass json argument to 'deserialize_impl' and pattern match on it. 
 //     We actually need to produce a function type with Meta-F* that takes a json argument and does something with it. 
-instance r_serializable: serializable r = {
-   //serialize_gen = (fun x -> synth_by_tactic (fun () -> serialize_impl (`r) x));
-   deserialize_gen = synth_by_tactic (fun () -> deserialize_impl r (`r));
+instance sample_record_1_serializable: serializable sample_record_1 = {
+   deserialize_gen = synth_by_tactic (fun () -> deserialize_impl sample_record_1 (`sample_record_1));
 }
 
 // We could simplify it a little and generate these instances with a line similar to the following:
@@ -178,21 +177,21 @@ instance r_serializable: serializable r = {
 
     
 let process_r_from_json (j : json{JObject? j}) : Tot (result (x:int{x >= 5})) = 
-    let r_deserialized : result r = deserialize j in
+    let r_deserialized : result sample_record_1 = deserialize j in
     match r_deserialized with
     | Valid rv -> Valid rv.l
     | Error msg -> Error msg
 
-let main = 
-    FStar.IO.print_string "Write json:\n";
-    let json_str = FStar.IO.input_line () in
-    let json = JsonStar.Parser.parse json_str in
-    if JObject? json
-        then begin
-            let l_r = process_r_from_json json in
-            match l_r with
-            | Valid l -> FStar.IO.print_string (P.sprintf "Value of l field is: %d\n" l)
-            | Error msg -> FStar.IO.print_string (P.sprintf "Value of l field is not available due to: %s\n" msg)
-            end
-        else FStar.IO.print_string "Provided json does not represent an object\n"
+//let main = 
+//    FStar.IO.print_string "Write json (sample_record_1):\n";
+//    let json_str = FStar.IO.input_line () in
+//    let json = JsonStar.Parser.parse json_str in
+//    if JObject? json
+//        then begin
+//            let l_r = process_r_from_json json in
+//            match l_r with
+//            | Valid l -> FStar.IO.print_string (P.sprintf "Value of l field is: %d\n" l)
+//            | Error msg -> FStar.IO.print_string (P.sprintf "Value of l field is not available due to: %s\n" msg)
+//            end
+//        else FStar.IO.print_string "Provided json does not represent an object\n"
     

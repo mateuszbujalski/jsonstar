@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="JsonStar.Serialization.Demo3.fst" />
+    <Compile Include="JsonStar.Serialization.Demo4.fst" />
     <None Include="App.config" />
     <Content Include="packages.config" />
   </ItemGroup>
